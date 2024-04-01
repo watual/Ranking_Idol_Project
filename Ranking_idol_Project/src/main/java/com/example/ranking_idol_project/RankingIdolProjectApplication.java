@@ -8,6 +8,9 @@ public class RankingIdolProjectApplication {
 
 	public static void main(String[] args) {
 		SpringApplication.run(RankingIdolProjectApplication.class, args);
+
+		//test1
 	}
 
 }
+q
