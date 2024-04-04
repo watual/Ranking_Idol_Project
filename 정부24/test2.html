@@ -37,33 +37,48 @@
       }
     })
     $("#search").click(async function () {
-      const apiKey = "AIzaSyBqjq6O85ZprEdYzzWZSy4iqQZ5CHCVr1s"; // 유효한 YouTube Data API 키를 입력합니다.
+      const apiKey = "AIzaSyDiHzWhXDHHM7Ox6jGOfGrhnsQ9ohKey8g"; // 유효한 YouTube Data API 키를 입력합니다.
       const apiUrl = `https://www.googleapis.com/youtube/v3/search`; // API URL
       const part = 'snippet';
       const q = document.getElementById('searchInput').value;
       const url = `${apiUrl}?part=${part}&q=${q}&key=${apiKey}`; // 완성된 요청 URL
+      console.log(url);
       fetch(url)
         .then((response) => response.json())
-        .then((data) => {
+        .then(data => {
           console.log(data);
+
+          // const resultList = document.getElementById('searchResult');
+          // data.forEach(song => {
+          //   const listItem = document.createElement('li');
+          //   listItem.textContent = '';
+          //   songList.appendChild(listItem);
+          // });
+
           const searchList = data.items;
-          const resultList = document.getElementById('searchResult');
           resultList.innerHTML = '';
           searchList.forEach((item) => {
             const thumbnailUrl = item.snippet.thumbnails.default.url;
-            const videoId = item.id.videoId;
+            const videoId = item.id.vide
             const title = item.snippet.title;
             resultList.innerHTML += `
-                                  <div>
-                                    <img id="idontknow" src="${thumbnailUrl}" alt="${title}" width="120" height="90">
-                                    <a href="https://www.youtube.com/watch?v=${videoId}" target="_blank">${title}</a>
-                                  </div>`;
+                                   <div id="wonha" onClick="wonhaClick"><img id="youtubeImage" src="${thumbnailUrl}" alt="${title}" width="120" height="90">
+                                   <label>${title}</label>
+                                 </div>`;
           });
+          //<a href="https://www.youtube.com/watch?v=${videoId}" target="_self">${title}</a>
         })
         .catch((error) => {
           console.error('에러코드 : ', error);
         });
     })
+    // $("#resultVideo").click(async function(){
+    //   <iframe target="_self" src="https://www.youtube.com/watch?v=${videoId}" width="300" height="100"></iframe>
+    // })
+    // $("#wonha").click(async function(){
+    //   alert("dd");
+    //   document.getElementById('resultVideo').innerHTML=' <iframe target="_self" src="https://www.google.com/webhp?igu=1" width="300" height="100"></iframe>';
+    // })
     $("#submit").click(async function () {
       let title = $('#exampleFormControlInput1').val();
       let content = $('#exampleFormControlTextarea1').val();
@@ -112,13 +127,15 @@
 
 <body>
   <div class="d-grid gap-2 col-6 mx-auto">
-    <button id="btnSongAdd" class="btn btn-primary" >노래 추가하기</button>
-  </div>pe="b
+    <button id="btnSongAdd" class="btn btn-primary" type="button">노래 추가하기</button>
+  </div>
   <div id="searchBar" class="searchBar" style="display: none">
     <input id="searchInput" type="text" class="searchKeyword" placeholder="검색어 입력" />
     <button id="search" type="submit" class="btnSearchSubmit">검색</button>
   </div>
   <div id="searchResult">
+  </div>
+  <div id="resultVideo">
   </div>
   <div class="mb-3">
     <label for="exampleFormControlInput1" class="form-label">제목</label>
