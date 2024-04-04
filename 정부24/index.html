@@ -60,7 +60,6 @@
             width: 100%;
         }
     </style>
-
     <script type="module">
         // Firebase SDK 라이브러리 가져오기
         import { initializeApp } from "https://www.gstatic.com/firebasejs/9.22.0/firebase-app.js";
@@ -111,7 +110,9 @@
 
             $('#card').append(temp_html);
         });
-
+        $("#pressthis").click(async function () {
+            alert("asdfasdf");
+        });
         $('.deletebtn').click(async function () {
             let docs_id = $(this).attr('id');
             //alert(docs_id);
@@ -162,7 +163,6 @@
         $("#savebtn").click(async function () {
             $('#postingbox').toggle();
         });
-
     </script>
 </head>
 
@@ -202,6 +202,7 @@
         <div class="p-5 mb-4 bg-body-tertiary rounded-3">
             <div class="container-fluid py-5">
                 <h1 class="display-5 fw-bold">킹덤</h1>
+                <button id="pressthis">여기를 눌러!</button>
                 <p class="col-md-8 fs-4">병든 왕을 둘러싸고 흉흉한 소문이 떠돈다. 어둠에 뒤덮인 조선, 기이한 역병에 신음하는 산하. 정체 모를 악에 맞서 백성을 구원할 희망은 오직
                     세자뿐이다.</p>
                 <button id="savebtn" type="button" class="btn btn-outline-light">영화 기록하기</button>
@@ -230,12 +231,13 @@
                 <option value="⭐⭐⭐⭐⭐">⭐⭐⭐⭐⭐</option>
             </select>
         </div>
-        
+
         <div class="form-floating mb-3">
             <input type="email" class="form-control" id="comment" placeholder="추천 이유">
             <label for="floatingInput">추천 이유</label>
         </div>
         <button id="postingbtn" type="button" class="btn btn-danger">기록하기</button>
+        <button id="pressthis2" type="button" class="btn btn-danger">여기를 눌러2</button>
     </div>
 
     <div class="mycards">
