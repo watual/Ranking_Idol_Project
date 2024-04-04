@@ -18,3 +18,8 @@
 		position: relative;
 		position: absolute;
 		top: 50%;
+
+                li:hover {
+                    opacity:0.5;	// 투명도 조절
+                    cursor:pointer;	// 마우스 올렸을때 마우스 모양
+                    transition: all 0.5s ease-out;	// 애니메이션 속도
