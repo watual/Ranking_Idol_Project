@@ -12,70 +12,56 @@
 </head>
 
 <body>
+
     <div class="full_size"> <!--1번-->
         <div class="logo">
-            <a href="#">
+            <a href="MainPage.html">
                 <img src="src/logo.png" alt="Music" />
             </a>
         </div>
+        <div class="nav_top_profile">
+            <div class="nav_top_profile_iden">
+                <img class="icon" src="src/icon/user.png">
+            </div>
+            <div class="nav_top_profile_setting">
+                <img class="icon" src="src/icon/set.png">
+            </div>
+        </div>
         <div class="nav_top"> <!--상단 nav bar-->
-            <div class="nav_top_logoLine "></div>
-            <div>
-                <span class="input-group-text">♬</span>
-                <input type="text" class="nav_top_search" aria-label="Amout (to the nearset dollar)">
+            <div class="nav_top_item">
+                <span class="nav_top_text">♬~노래 검색</span>
+                <input type="text" class="nav_top_search" required="required"
+                    aria-label="Amout (to the nearset dollar)">
             </div>
-            <!-- 
-            <nav class="navbar navbar-expand-lg bg-body-tertiary">
-                <div class="container-fluid">asdasd
-                    <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
-                        data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
-                        aria-expanded="false" aria-label="Toggle navigation">
-                        <span class="navbar-toggler-icon">qwd</span>
-                    </button>
-                    <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                        <div class="nav_top_search">
-                        <div class="input-group mb-3 ">
-                            <span class="input-group-text">♬</span>
-                            <input type="text" class="form-control" aria-label="Amount (to the nearest dollar)">
-                            
-                        </div>
-                    </div>
-                </div>
-            </nav> -->
-            <div>
-                <div class="nav_top_profile">
-                </div>
-                <div class="nav_top_profile">
-
-                </div>
-            </div>
-
         </div>
         <div class="mainDiv">
             <div class="nav_left"> <!--좌측 nav bar-->
                 <div class="nav_left_top">
                     <ul>
                         <li>
-                            <img src="src/icon/home.png" />
+                            <img class="icon" src="src/icon/home.png" />
                             <a href="">
                                 홈
                             </a>
                         </li>
                         <li>
-                            <img src="src/icon/search.png" />
+                            <img class="icon" src="src/icon/search.png" />
                             <a href="">
                                 둘러보기
                             </a>
                         </li>
                         <li>
-                            <img src="src/icon/myPlayList.png" />
+                            <img class="icon" src="src/icon/myPlayList.png" />
                             <a href="">
                                 My PlayList
                             </a>
                         </li>
+                        <div style="height: 70px;">
+
+                        </div>
                     </ul>
                 </div>
-                <div>
+                <div class="nav_left_top">
                     <ul>
                         <li>
                             playList1
@@ -102,27 +88,30 @@
                 </div>
             </div>
             <div class="mainContent">
-                <div>
-                    <iframe src="https://www.google.com/webhp?igu=1" width="700px" height="100%"></iframe>
-                </div>
-                <div>
-                    랄ㅇㄻ나럼ㄴ디ㅏ러닏
-                </div>
-                <div>
-                    랄ㅇㄻ나럼ㄴ디ㅏ러닏
-                </div>
-                <div>
-                    랄ㅇㄻ나럼ㄴ디ㅏ러닏
-                </div>
-                <div>
-                    랄ㅇㄻ나럼ㄴ디ㅏ러닏
+                <div class="recommendSong">
+                    <div class="recommendSong_item">
+                        <img class="albumThumnail" src="src/album/ReWind.jpg">
+                        <div>이세계아이돌</div>
+                    </div>
+                    <div class="recommendSong_item">
+                        <img class="albumThumnail" src="src/album/겨울봄.jpg">
+                        <div>이세계아이돌</div>
+                    </div>
+                    <div class="recommendSong_item">
+                        <img class="albumThumnail" src="src/album/LockDown.jpg">
+                        <div>이세계아이돌</div>
+                    </div>
+                    <div class="recommendSong_item">
+                        <img class="albumThumnail" src="src/album/Kidding.jpg">
+                        <div>이세계아이돌</div>
+                    </div>
                 </div>
             </div>
         </div>
     </div>
     <script>
         var test = document.getElementById("helloas");
-        test.click(function(){
+        test.click(function () {
             alert("왜안됨?");
         });
     </script>

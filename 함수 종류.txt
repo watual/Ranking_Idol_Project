@@ -5,8 +5,7 @@
 	- 색상
 		color: red;
 		background-color: green;
-	- 정렬
-		justify-content: center;
+
 	- 크기
 		width: 100%;
 		height: 100wh;
@@ -14,10 +13,19 @@
 		padding-left: 10px;
 	- 외곽선
 		outline: dashed 1px black;
+	- 정렬
+		align-items: center;
+		justify-content: center;
+		margin-left: auto; margin-right: auto;
+		vertical-align: middle;	// 인라인 레벨 요소와 테이블 셀 요소 내부의 수직 정렬을 지정하
+		text-align: center;
+		display: table-cell;
+		grid-area: 1 / 1 / 2 / 2;
 	- 위치
+		line-height: 100px;	// white-space: nowrap; 자동 줄바꿈 비활성화
 		position: relative;
 		position: absolute;
-		top: 50%;
+		top: 50%; transform: translateY(-50%);
 
                 li:hover {
                     opacity:0.5;	// 투명도 조절
