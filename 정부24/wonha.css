@@ -3,10 +3,10 @@
     padding: 0;
 }
 
+html,
 body {
-    max-width: 100vw;
-    min-height: 100vh;
-    margin: 0 auto;
+    height: 100vh;
+    background-color: black;
 }
 
 a {
@@ -18,9 +18,20 @@ a:hover {
     color: white;
 }
 
+.icon {
+    width: 27px;
+    height: 27px;
+    margin-right: 5px;
+}
+.albumThumnail {
+    height: 200px;
+}
+
+
+
 .full_size {
-    width: 100vw;
-    height: 100vh;
+    width: 100%;
+    height: 100%;
     display: flex;
     flex-direction: column;
 
@@ -31,7 +42,6 @@ a:hover {
         height: 115px;
         z-index: 10;
         padding: 10px;
-        background-color: black;
         display: flex;
         justify-content: center;
 
@@ -43,25 +53,66 @@ a:hover {
 
     .nav_top {
         position: relative;
-        padding-left: 250px;
-        width: 100%;
+        min-height: 100px;
+        margin-left: 250px;
+        padding-left: 50px;
 
-        background-color: black;
         border-bottom-style: solid;
         border-color: rgb(50, 50, 50);
 
-        .nav_top_search {
-            width: 100%;
-            max-width: 700px;
-        }
+        .nav_top_item {
+            margin: 0 auto 0 auto;
+            min-width: 400px;
+            height: 100%;
 
+            .nav_top_text {
+                position: absolute;
+                transform: translateY(50%);
+                min-width: 150px;
+                padding: 10px;
+                pointer-events: none;
+                font-size: 1em;
+                color: white;
+            }
+
+            .nav_top_search {
+                position: absolute;
+                transform: translateY(50%);
+                opacity: 0.5;
+                width: 400px;
+                background-color: rgb(20, 20, 20);
+                border-radius: 10px;
+                border: 1px solid rgb(50, 50, 50);
+                padding: 10px;
+                outline: none;
+                color: white;
+                font-size: 1em;
+            }
+
+            .nav_top_search:focus ~ .nav_top_text {
+                color: aqua;
+                font-size: 100px;
+            }
+
+        }
+    }
+    .nav_top_profile {
+        position: absolute;
+        top: 28px; 
+        right: 0;
+        width: 100px;
+        z-index: 10;
+        display: flex;
+
+        img {
+            margin-left: 15px;
+        }
 
     }
 
     .mainDiv {
         width: 100%;
         height: 100%;
-        background-color: rgb(31, 32, 28);
         display: flex;
         flex-direction: row;
 
@@ -69,7 +120,10 @@ a:hover {
             color: white;
             height: 100%;
             min-width: 250px;
-            margin-top: 50px;
+            padding-top: 50px;
+            border-width: 1px;
+            border-style: solid;
+            border-color: rgb(50, 50, 50);
 
             .nav_left_top {
                 background-color: black;
@@ -77,22 +131,21 @@ a:hover {
                 padding: 0;
                 margin: 0;
 
-                ul {
-                    padding: 5px;
 
+                ul {
+                    padding: 0;
+                    margin: 0;
                     li {
                         display: flex;
                         justify-content: left;
                         height: 50px;
                         line-height: 50px;
-                        margin: 5px;
                         border-radius: 10px;
+                        align-items: center;
                         text-align: center;
                         text-indent: .1em;
-
-                        img {
-                            margin: 8px;
-                        }
+                        padding-left: 8px;
+                        
                     }
 
                     li:hover {
@@ -103,39 +156,30 @@ a:hover {
                 }
             }
 
-            .nav_left_bot {
-
-
-                ul {
-
-                    li {
-                        display: flex;
-                        justify-content: left;
-                        height: 50px;
-                        line-height: 50px;
-                        margin: 5px;
-                        border-radius: 10px;
-                        text-align: center;
-                        text-indent: .1em;
-
-                        img {
-                            margin: 8px;
-                        }
-                    }
-
-                    li:hover {
-                        cursor: pointer;
-                        transition: all 0.2s ease-out;
-                        background-color: rgb(50, 50, 50);
-                    }
-                }
-            }
         }
-        
+
         .mainContent {
-            background-color: rgb(210, 19, 19);
-            min-height: 200px;
+            height: 100%;
+            width: fit-content;
+            margin: 0 auto 0 auto;
+            background-color: black;
+
+            .recommendSong {
+                display: flex;
+                align-items: center;
+                justify-content: left;
+                width: fit-content;
+                margin: 50px;
+
+                .recommendSong_item {
+                    display: flex;
+                    flex-direction: column;
+                    color: white;
+                    padding: 10px;
+                }
+            }
         }
 
     }
+    
 }
