@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+</head>
+<style>
+    @import url('https://fonts.googleapis.com/css2?family=Gugi&family=Noto+Sans+KR:wght@100&display=swap');
+    * {
+        font-family: 'Noto Sans KR', sans-serif;
+    }
+    body {
+        background-color: #FFFFFF;
+    }
+    .lgbox {
+        background-color: #FFD445;
+        border-radius: 200px;
+        /* 선 종류 선택하는 부분 solid[실선], dashed[긴점선], dotted[점선], double[이중선], groove[스타일이중선],
+         ridge[입체], inset[입체_들어간], outset[입체_나온] */
+        border-style: solid;
+        /* 선 굵기 */
+        border-width: 3px;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        width: 400px;
+        height: 400px;
+        padding: 40px;
+        box-shadow: 10px 10px 50px 0px rgb(175, 175, 175);
+        margin: 13% auto 20px auto;
+        padding: 20px 20px 20px 20px;
+    }
+    .lgbtn {
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        justify-content: center;
+        margin: 50px auto 0px auto;
+    }
+    .lgbtn>button {
+        margin: 0px 8px 0px 8px;
+    }
+    .form-floating>input {
+        background-color: transparent;
+        font-size: 20px;
+        border-color: black;
+    }
+    .form-floating>label {
+        color: black;
+    }
+</style>
+<script type="module">
+    $("#ji").click(async function () {
+        $('#lgbox').toggle();
+    })
+</script>
+</head>
+<body>
+    <div class="lgbox">
+        <div class="form-floating mb-3">
+            <input type="email" class="form-control" id="floatingInput" placeholder="name@example.com">
+            <label for="floatingInput">Email address</label>
+        </div>
+        <div class="form-floating">
+            <input type="password" class="form-control" id="floatingPassword" placeholder="Password">
+            <label for="floatingPassword">Password</label>
+        </div>
+        <div class="lgbtn">
+            <button id="lg" type="button" class="btn btn-dark">Login</button>
+            <button id="ji" type="button" class="btn btn-outline-dark">Join</button>
+        </div>
+    </div>
+</body>
+</html>
