@@ -9,6 +9,19 @@ body {
     background-color: black;
 }
 
+/* 스크롤바 커스텀 */
+*::-webkit-scrollbar {
+    width: 10px;
+}
+
+*::-webkit-scrollbar-track {
+    background-color: grey;
+}
+
+*::-webkit-scrollbar-thumb {
+    background-color: rgb(24, 24, 24);
+}
+
 a {
     text-decoration-line: none;
     color: white;
@@ -112,10 +125,11 @@ a:hover {
     }
 
     .mainDiv {
-        width: 100%;
+        width: 100vw;
         height: 100%;
         display: flex;
         flex-direction: row;
+        justify-content: space-between;
 
         .nav_left {
             height: 100%;
@@ -163,16 +177,23 @@ a:hover {
 
         .mainContent1 {
             height: 100%;
-            width: fit-content;
-            margin: 0 auto 0 auto;
+            width: 100%;
+            margin: 0;
             background-color: black;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            
 
             .recommendSong {
                 display: flex;
                 align-items: center;
                 justify-content: left;
-                width: fit-content;
+                width: 80%;
                 margin: 50px;
+                overflow: auto;
+                height: 300px;
+                min-height: 300px;
 
                 .recommendSong_item {
                     display: flex;
@@ -183,19 +204,34 @@ a:hover {
 
             .mainContent2 {
                 min-height: 700px;
+                width: 90%;
+                max-width: 90%;
                 display: grid;
                 grid-template-columns: repeat(2, 50%);
+
                 .idolRank {
                     display: flex;
                     flex-direction: column;
                     margin: 10px;
                     background: linear-gradient(45deg, rgb(51, 5, 51), rgb(56, 39, 7));
-                    li {
+                    overflow: auto;
+                    height: calc(100vh - 550px);
+
+                    .idolRank_item {
                         margin-top: 10px;
                         margin-bottom: 10px;
                         display: flex;
                         flex-direction: row;
 
+                        .idolRank_item_text {
+                            display: flex;
+                            flex-direction: column;
+                            padding: 10px;
+
+                            div {
+                                margin: 10px;
+                            }
+                        }
                     }
                 }
 
@@ -204,11 +240,15 @@ a:hover {
                     flex-direction: column;
                     margin: 10px;
                     background: linear-gradient(45deg, rgb(7, 21, 43), rgb(12, 54, 31));
-                    li {
+                    overflow: auto;
+                    height: calc(100vh - 550px);
+
+                    .musicRank_item {
                         margin-top: 10px;
                         margin-bottom: 10px;
                         display: flex;
                         flex-direction: row;
+
 
                     }
                 }

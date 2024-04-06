@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>게시글 작성하기</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script type="module">
+        // Import the functions you need from the SDKs you need
+        import { getFirestore, doc, deleteDoc, query, limit, collection, addDoc, orderBy, getDocs, getDoc } from "https://www.gstatic.com/firebasejs/10.10.0/firebase-firestore.js";
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/10.10.0/firebase-app.js";
+        import { getAnalytics } from "https://www.gstatic.com/firebasejs/10.10.0/firebase-analytics.js";
+        // TODO: Add SDKs for Firebase products that you want to use
+        // https://firebase.google.com/docs/web/setup#available-libraries
+        // Your web app's Firebase configuration
+        // For Firebase JS SDK v7.20.0 and later, measurementId is optional
+        const firebaseConfig = {
+            apiKey: "AIzaSyCZUdy-mTvWEIkXbz-bVlYqGNFlc7SE6oc",
+            authDomain: "jomijin.firebaseapp.com",
+            projectId: "jomijin",
+            storageBucket: "jomijin.appspot.com",
+            messagingSenderId: "904159565516",
+            appId: "1:904159565516:web:0938fd326fdf00c9c8d469",
+            measurementId: "G-YKWYCDXCLS"
+        };
+        // Initialize Firebase
+        const app = initializeApp(firebaseConfig);
+        const db = getFirestore(app);
+        const analytics = getAnalytics(app);
+        $("#btnSongAdd").click(async function () {
+            const searchBar = document.getElementById('searchBar');
+            if (searchBar.style.display === 'block') {
+                searchBar.style.display = 'none';
+            } else {
+                searchBar.style.display = 'block';
+            }
+        })
+
+
+        $("#search").click(async function () {
+            let searchInput = document.getElementById("searchInput").value;
+            let url = "https://ws.audioscrobbler.com/2.0/?method=track.search&track=" + searchInput + "&api_key=a438d29708eafc8ba9818d57a6696d6b&format=json";
+            fetch(url)
+                .then((response) => response.json())
+                .then(async (data) => {
+                    console.log(data);
+                    const searchList = data.results.trackmatches.track;
+                    const resultList = document.getElementById('searchResult');
+                    resultList.innerHTML = '';
+                    searchList.forEach((item) => {
+
+
+                        const url = item.url;
+                        const artist = item.artist
+                        const name = item.name;
+                        const parentDiv = $(`
+                            <div id="dynamicDiv">
+                                <label>${name}  :  ${artist}</label>
+                            </div>
+                        `).appendTo(resultList);
+                        //동적으로 생성한 div에 클릭 이벤트를 추가합니다.
+                        parentDiv.on('click', async function(event) {
+                            // 클릭 시 동작할 코드를 여기에 작성합니다.
+                            alert(name+' : '+artist);
+                            console.log(event);
+                            let doc = {
+                                'name': name,
+                                'artist': artist,
+                                'title': '제맘을 받아주세요',
+                                'content': '야후 꾸러기 놀이터'
+                            };
+                            await addDoc(collection(db, "posts"), doc);
+                        });
+                    });
+                })
+                .catch((error) => {
+                    console.error('에러코드 : ', error);
+                });
+        })
+        $("#submit").click(async function () {
+            let title = $('#exampleFormControlInput1').val();
+            let content = $('#exampleFormControlTextarea1').val();
+            let doc = {
+                'title': title,
+                'content': content
+            };
+            await addDoc(collection(db, "posts"), doc);
+            window.location.reload();
+        })
+    </script>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous" />
+</head>
+<style>
+    .mb-3 {
+        margin: 100px 100px auto 100px;
+    }
+
+    .mb-3>textarea {
+        height: 400px;
+    }
+
+    #btnSongAdd {
+        margin: 10px auto 0px auto;
+    }
+
+    #submit {
+        margin-left: 100px;
+    }
+
+    .searchBar {
+        width: 40%;
+        margin: 30px auto 0px auto;
+    }
+
+    .searchKeyword {
+        width: 500px;
+    }
+
+    #searchResult {
+        width: 50%;
+        margin: 50px auto 0px auto;
+    }
+</style>
+
+<body>
+    <div class="d-grid gap-2 col-6 mx-auto">
+        <button id="btnSongAdd" class="btn btn-primary" type="button">노래 추가하기</button>
+    </div>
+    <div id="searchBar" class="searchBar" style="display: none">
+        <input id="searchInput" type="text" class="searchKeyword" placeholder="검색어 입력" />
+        <button id="search" type="submit" class="btnSearchSubmit">검색</button>
+    </div>
+    <div id="searchResult">
+    </div>
+    <div id="resultVideo">
+    </div>
+    <div class="mb-3">
+        <label for="exampleFormControlInput1" class="form-label">제목</label>
+        <input type="email" class="form-control" id="exampleFormControlInput1" placeholder="제목을 입력하세요" />
+        <label for="exampleFormControlTextarea1" class="form-label"></label>
+        <textarea class="form-control" id="exampleFormControlTextarea1" rows="3" placeholder="내용을 작성해주세요"></textarea>
+    </div>
+    <button id="submit" class="btn btn-primary" type="button">작성</button>
+</body>
+
+</html>
