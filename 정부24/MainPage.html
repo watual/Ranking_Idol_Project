@@ -143,24 +143,32 @@
                     <!-- 노래순위 -->
                     <div class="musicRank">
                         <div class="musicRank_item">
-                            <img class="icon" src="src/album/ReWind.jpg">
-                            <div>이세계 아이돌</div>
-                            <div>조회수 : 100,000,000</div>
+                            <img class="music_icon" src="src/album/ReWind.jpg">
+                            <div class="musicRank_item_text">
+                                <div>이세계 아이돌</div>
+                                <div>ReWind</div>
+                            </div>
                         </div>
                         <div class="musicRank_item">
-                            <img class="icon" src="src/album/겨울봄.jpg">
-                            <div>이세계 아이돌</div>
-                            <div>조회수 : 100,000,000</div>
+                            <img class="music_icon" src="src/album/겨울봄.jpg">
+                            <div class="musicRank_item_text">
+                                <div>이세계 아이돌</div>
+                                <div>겨울봄</div>
+                            </div>
                         </div>
                         <div class="musicRank_item">
-                            <img class="icon" src="src/album/LockDown.jpg">
-                            <div>이세계 아이돌</div>
-                            <div>조회수 : 100,000,000</div>
+                            <img class="music_icon" src="src/album/LockDown.jpg">
+                            <div class="musicRank_item_text">
+                                <div>이세계 아이돌</div>
+                                <div>LockDown</div>
+                            </div>
                         </div>
                         <div class="musicRank_item">
-                            <img class="icon" src="src/album/Kidding.jpg">
-                            <div>이세계 아이돌</div>
-                            <div>조회수 : 100,000,000</div>
+                            <img class="music_icon" src="src/album/Kidding.jpg">
+                            <div class="musicRank_item_text">
+                                <div>이세계 아이돌</div>
+                                <div>Kidding</div>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -189,6 +197,34 @@
                             <div class="idolRank_item_text">
                                 <div>${dataRes_name}</div>
                                 <div>조회수 : ${playCount}</div>
+                            </div>
+                        </div>
+                        `);
+                    })
+                })
+                .catch((error) => {
+                    console.error('에러코드 : ', error);
+                });
+
+            let getTopTracks = "https://ws.audioscrobbler.com/2.0/?method=chart.gettoptracks&api_key=54f23d667cf616502635a2d6dc54b1bb&format=json";
+            fetch(getTopTracks)
+                .then((response) => response.json())
+                .then(async (data) => {
+                    const dataResponse = data.tracks.track;
+                    dataResponse.forEach(item => {
+                        // console.log(item);
+                        const artist = item.artist.name;
+                        const name = item.name;
+                        const playCount = item.playcount;
+                        const url = item.url;
+
+
+                        $('.musicRank').append(`
+                        <div class="musicRank_item">
+                            <img class="music_icon" src="src/album/ReWind.jpg">
+                            <div class="musicRank_item_text">
+                                <div>${artist}</div>
+                                <div>${name}</div>
                             </div>
                         </div>
                         `);
