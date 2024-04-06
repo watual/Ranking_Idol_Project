@@ -87,29 +87,40 @@ a:hover {
                 padding: 10px;
                 pointer-events: none;
                 font-size: 1em;
+                background-color: black;
+                border-style: none;
+                color: white;
             }
 
             .nav_top_search {
                 position: absolute;
                 transform: translateY(50%);
+                z-index: 20;
                 opacity: 0.5;
                 width: 400px;
+                height: 47px;
                 background-color: rgb(20, 20, 20);
                 border-radius: 10px;
                 border: 1px solid rgb(50, 50, 50);
                 padding: 10px;
                 outline: none;
-                font-size: 1em;
+                color: white
+            }
+            .nav_top_search_submit {
+                position: absolute;
+                transform: translateY(50%);
+                width: 50px;
+                padding: 10px;
+                pointer-events: painted;
+                background-color: black;
+                color: white;
+                border-width: 0;
+                margin-left: 400px;
             }
 
-            .nav_top_search:focus~.nav_top_text {
-                color: aqua;
-                font-size: 100px;
-            }
 
         }
     }
-
     .nav_top_profile {
         position: absolute;
         top: 28px;
