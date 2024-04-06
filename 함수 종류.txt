@@ -48,3 +48,16 @@
         $('#아이디1, #아이디2').click(function(){
             alert("입력2?");
         });
+
+
+jQuery 에서는 
+$("#test").val("입력값"); 
+형식입니다 
+api.jquery.com 에서 자세한 내용은 검색으로~ 
+
+value 속성으로 넣으려면
+$("#test")[0].value="입력값";
+으로 넣으면 됩니다. 
+
+
+CSS 결합자
