@@ -37,9 +37,9 @@
             <div class="nav_left"> <!--좌측 nav bar-->
                 <div class="nav_left_top">
                     <ul>
-                        <li>
+                        <li onclick="location.href='MainPage.html';">
                             <img class="icon" src="src/icon/home.png" />
-                            <a href="">
+                            <a>
                                 홈
                             </a>
                         </li>
@@ -89,51 +89,57 @@
             </div>
             <div class="mainContent1">
                 <!-- 추천노래 -->
+                <div class="titleText titleText_rec">최신 추천곡</div>
                 <div class="recommendSong">
                     <div class="recommendSong_item">
-                        <img class="albumThumnail" src="src/album/ReWind.jpg">
-                        <div>이세계아이돌</div>
+                        <img class="albumThumnail" src="src/album/MashUp.webp" onclick="location.href='https:www.youtube.com/watch?v=SXE-gIU3yJs&list=RDGMEM0s70dY0AfCwh3LqQ-Bv1xg&start_radio=1&rv=QgMFpuos4Rg';">
+                        <div>MashUp _ 아이네</div>
                     </div>
                     <div class="recommendSong_item">
-                        <img class="albumThumnail" src="src/album/겨울봄.jpg">
-                        <div>이세계아이돌</div>
+                        <img class="albumThumnail" src="src/album/ReWind.jpg" onclick="location.href='https:www.youtube.com/watch?v=fgSXAKsq-Vo';">
+                        <div>RE:WIND _ 이세계아이돌</div>
                     </div>
                     <div class="recommendSong_item">
-                        <img class="albumThumnail" src="src/album/LockDown.jpg">
-                        <div>이세계아이돌</div>
+                        <img class="albumThumnail" src="src/album/겨울봄.jpg" onclick="location.href='https:www.youtube.com/watch?v=JY-gJkMuJ94';">
+                        <div>겨울봄 _ 이세계아이돌</div>
                     </div>
                     <div class="recommendSong_item">
-                        <img class="albumThumnail" src="src/album/Kidding.jpg">
-                        <div>이세계아이돌</div>
+                        <img class="albumThumnail" src="src/album/LockDown.jpg" onclick="location.href='https:www.youtube.com/watch?v=QgMFpuos4Rg';">
+                        <div>LockDown _ 이세계아이돌</div>
+                    </div>
+                    <div class="recommendSong_item">
+                        <img class="albumThumnail" src="src/album/Kidding.jpg" onclick="location.href='https:www.youtube.com/watch?v=rDFUl2mHIW4';">
+                        <div>Kidding _ 이세계아이돌</div>
                     </div>
                 </div>
 
                 <div class="mainContent2">
                     <!-- 가수순위 -->
                     <div class="idolRank">
-                        <div class="idolRank_item">
+                        <div class="titleText">Artist Rank</div>
+                        <div class="idolRank_item" onclick="location.href='https:www.youtube.com/watch?v=fgSXAKsq-Vo';">
                             <img class="albumThumnail" src="src/album/ReWind.jpg">
                             <div class="idolRank_item_text">
                                 <div>이세계 아이돌</div>
                                 <div>조회수 : 100,000,000</div>
                             </div>
                         </div>
-                        <div class="idolRank_item">
+                        <div class="idolRank_item" onclick="location.href='https:www.youtube.com/watch?v=JY-gJkMuJ94';">
                             <img class="albumThumnail" src="src/album/겨울봄.jpg">
                             <div class="idolRank_item_text">
                                 <div>이세계 아이돌</div>
                                 <div>조회수 : 100,000,000</div>
                             </div>
                         </div>
-                        <div class="idolRank_item">
+                        <div class="idolRank_item" onclick="location.href='https:www.youtube.com/watch?v=QgMFpuos4Rg';">
                             <img class="albumThumnail" src="src/album/LockDown.jpg">
                             <div class="idolRank_item_text">
                                 <div>이세계 아이돌</div>
                                 <div>조회수 : 100,000,000</div>
                             </div>
                         </div>
-                        <div class="idolRank_item">
-                            <img class="albumThumnail" src="src/album/ReWind.jpg">
+                        <div class="idolRank_item" onclick="location.href='https:www.youtube.com/watch?v=rDFUl2mHIW4';">
+                            <img class="albumThumnail" src="src/album/Kidding.jpg">
                             <div class="idolRank_item_text">
                                 <div>이세계 아이돌</div>
                                 <div>조회수 : 100,000,000</div>
@@ -142,28 +148,36 @@
                     </div>
                     <!-- 노래순위 -->
                     <div class="musicRank">
-                        <div class="musicRank_item">
+                        <div class="titleText">Music Rank</div>
+                        <div class="musicRank_item" onclick="location.href='https:www.youtube.com/watch?v=SXE-gIU3yJs&list=RDGMEM0s70dY0AfCwh3LqQ-Bv1xg&start_radio=1&rv=QgMFpuos4Rg';">
+                            <img class="music_icon" src="src/album/MashUp.webp">
+                            <div class="musicRank_item_text">
+                                <div>이세계 아이돌</div>
+                                <div>MashUp</div>
+                            </div>
+                        </div>
+                        <div class="musicRank_item" onclick="location.href='https:www.youtube.com/watch?v=fgSXAKsq-Vo';">
                             <img class="music_icon" src="src/album/ReWind.jpg">
                             <div class="musicRank_item_text">
                                 <div>이세계 아이돌</div>
                                 <div>ReWind</div>
                             </div>
                         </div>
-                        <div class="musicRank_item">
+                        <div class="musicRank_item" onclick="location.href='https:www.youtube.com/watch?v=JY-gJkMuJ94';">
                             <img class="music_icon" src="src/album/겨울봄.jpg">
                             <div class="musicRank_item_text">
                                 <div>이세계 아이돌</div>
                                 <div>겨울봄</div>
                             </div>
                         </div>
-                        <div class="musicRank_item">
+                        <div class="musicRank_item" onclick="location.href='https:www.youtube.com/watch?v=QgMFpuos4Rg';">
                             <img class="music_icon" src="src/album/LockDown.jpg">
                             <div class="musicRank_item_text">
                                 <div>이세계 아이돌</div>
                                 <div>LockDown</div>
                             </div>
                         </div>
-                        <div class="musicRank_item">
+                        <div class="musicRank_item" onclick="location.href='https:www.youtube.com/watch?v=rDFUl2mHIW4';">
                             <img class="music_icon" src="src/album/Kidding.jpg">
                             <div class="musicRank_item_text">
                                 <div>이세계 아이돌</div>
@@ -189,13 +203,14 @@
                         const dataRes_name = item.name;
                         //const dataRes_image = item.image[0]['#text'];
                         const playCount = item.playcount;
+                        const url = item.url;
 
 
                         $('.idolRank').append(`
-                        <div class="idolRank_item">
+                        <div class="idolRank_item" onclick="location.href='${url}';">
                             <img class="albumThumnail" src="src/album/ReWind.jpg">
                             <div class="idolRank_item_text">
-                                <div>${dataRes_name}</div>
+                                <div onclick="location.href='${url}';">${dataRes_name}</div>
                                 <div>조회수 : ${playCount}</div>
                             </div>
                         </div>
@@ -212,7 +227,7 @@
                 .then(async (data) => {
                     const dataResponse = data.tracks.track;
                     dataResponse.forEach(item => {
-                        // console.log(item);
+                        //console.log(item);
                         const artist = item.artist.name;
                         const name = item.name;
                         const playCount = item.playcount;
@@ -221,10 +236,10 @@
 
                         $('.musicRank').append(`
                         <div class="musicRank_item">
-                            <img class="music_icon" src="src/album/ReWind.jpg">
+                            <img class="music_icon" src="src/album/ReWind.jpg" onclick="location.href='${url}';">
                             <div class="musicRank_item_text">
                                 <div>${artist}</div>
-                                <div>${name}</div>
+                                <div onclick="location.href='${url}';">${name}</div>
                             </div>
                         </div>
                         `);
@@ -234,9 +249,6 @@
                     console.error('에러코드 : ', error);
                 });
         }
-        $('.albumThumnail').click(function () {
-            alert('asdf');
-        })
     </script>
 </body>
 

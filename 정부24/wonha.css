@@ -184,13 +184,23 @@ a:hover {
             flex-direction: column;
             align-items: center;
 
-
+            .titleText {
+                font-size: 30px;
+                margin-left: 5%;
+                margin-top: 5px;
+                margin-bottom: 5px;
+            }
+            .titleText_rec{
+                align-self: flex-start;
+                margin-top: 30px;
+                padding-left: 40px;
+            }
             .recommendSong {
                 display: flex;
                 align-items: center;
                 justify-content: left;
                 width: 80%;
-                margin: 50px;
+                margin: 0 50px 50px 50px;
                 overflow: auto;
                 height: 300px;
                 min-height: 300px;
