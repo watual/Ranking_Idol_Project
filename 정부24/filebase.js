@@ -48,3 +48,4 @@ docs.forEach((doc) => {
 
     $('#card').append(temp_html);
 });
+

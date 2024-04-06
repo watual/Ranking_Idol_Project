@@ -80,9 +80,9 @@
                             </div>
                         `).appendTo(resultList);
                         //동적으로 생성한 div에 클릭 이벤트를 추가합니다.
-                        parentDiv.on('click', async function(event) {
+                        parentDiv.on('click', async function (event) {
                             // 클릭 시 동작할 코드를 여기에 작성합니다.
-                            alert(name+' : '+artist);
+                            alert(name + ' : ' + artist);
                             console.log(event);
                             let doc = {
                                 'name': name,
@@ -97,6 +97,18 @@
                 .catch((error) => {
                     console.error('에러코드 : ', error);
                 });
+        })
+        $("#search2").click(async function () {
+            let searchInput = document.getElementById("searchInput").value;
+            let url = 'https://api.soundcloud.com/tracks?q=hello&ids=1%2C2%2C3&genres=Pop%2CHouse&tags=test&bpm%5Bfrom%5D=123&bpm%5Bto%5D=456&duration%5Bfrom%5D=123456&duration%5Bto%5D=456789&created_at%5Bfrom%5D=2020-12-24%2000%3A00%3A00&created_at%5Bto%5D=2020-12-26%2000%3A00%3A00&access=playable%2Cpreview&limit=2&offset=0&linked_partitioning=true';
+
+            fetch(url, {
+                method: "GET",
+                headers: {
+                    "Accept": "application/json; charset=utf-8",
+                    "Authorization": "얻은 토큰",
+                },
+            }).then((response) => console.log(response+"asdf"));
         })
         $("#submit").click(async function () {
             let title = $('#exampleFormControlInput1').val();
@@ -163,6 +175,7 @@
         <textarea class="form-control" id="exampleFormControlTextarea1" rows="3" placeholder="내용을 작성해주세요"></textarea>
     </div>
     <button id="submit" class="btn btn-primary" type="button">작성</button>
+    <button id="search2" type="submit" class="btnSearchSubmit">테스트 버튼</button>
 </body>
 
 </html>
