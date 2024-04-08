@@ -122,78 +122,10 @@
                     <!-- 가수순위 -->
                     <div class="idolRank">
                         <div class="titleText">Artist Rank</div>
-                        <div class="idolRank_item" onclick="location.href='https:www.youtube.com/watch?v=fgSXAKsq-Vo';">
-                            <img class="albumThumnail" src="src/album/ReWind.jpg">
-                            <div class="idolRank_item_text">
-                                <div>이세계 아이돌</div>
-                                <div>조회수 : 100,000,000</div>
-                            </div>
-                        </div>
-                        <div class="idolRank_item" onclick="location.href='https:www.youtube.com/watch?v=JY-gJkMuJ94';">
-                            <img class="albumThumnail" src="src/album/겨울봄.jpg">
-                            <div class="idolRank_item_text">
-                                <div>이세계 아이돌</div>
-                                <div>조회수 : 100,000,000</div>
-                            </div>
-                        </div>
-                        <div class="idolRank_item" onclick="location.href='https:www.youtube.com/watch?v=QgMFpuos4Rg';">
-                            <img class="albumThumnail" src="src/album/LockDown.jpg">
-                            <div class="idolRank_item_text">
-                                <div>이세계 아이돌</div>
-                                <div>조회수 : 100,000,000</div>
-                            </div>
-                        </div>
-                        <div class="idolRank_item" onclick="location.href='https:www.youtube.com/watch?v=rDFUl2mHIW4';">
-                            <img class="albumThumnail" src="src/album/Kidding.jpg">
-                            <div class="idolRank_item_text">
-                                <div>이세계 아이돌</div>
-                                <div>조회수 : 100,000,000</div>
-                            </div>
-                        </div>
                     </div>
                     <!-- 노래순위 -->
                     <div class="musicRank">
                         <div class="titleText">Music Rank</div>
-                        <div class="musicRank_item"
-                            onclick="location.href='https:www.youtube.com/watch?v=SXE-gIU3yJs&list=RDGMEM0s70dY0AfCwh3LqQ-Bv1xg&start_radio=1&rv=QgMFpuos4Rg';">
-                            <img class="music_icon" src="src/album/MashUp.webp">
-                            <div class="musicRank_item_text">
-                                <div>이세계 아이돌</div>
-                                <div>MashUp</div>
-                            </div>
-                        </div>
-                        <div class="musicRank_item"
-                            onclick="location.href='https:www.youtube.com/watch?v=fgSXAKsq-Vo';">
-                            <img class="music_icon" src="src/album/ReWind.jpg">
-                            <div class="musicRank_item_text">
-                                <div>이세계 아이돌</div>
-                                <div>ReWind</div>
-                            </div>
-                        </div>
-                        <div class="musicRank_item"
-                            onclick="location.href='https:www.youtube.com/watch?v=JY-gJkMuJ94';">
-                            <img class="music_icon" src="src/album/겨울봄.jpg">
-                            <div class="musicRank_item_text">
-                                <div>이세계 아이돌</div>
-                                <div>겨울봄</div>
-                            </div>
-                        </div>
-                        <div class="musicRank_item"
-                            onclick="location.href='https:www.youtube.com/watch?v=QgMFpuos4Rg';">
-                            <img class="music_icon" src="src/album/LockDown.jpg">
-                            <div class="musicRank_item_text">
-                                <div>이세계 아이돌</div>
-                                <div>LockDown</div>
-                            </div>
-                        </div>
-                        <div class="musicRank_item"
-                            onclick="location.href='https:www.youtube.com/watch?v=rDFUl2mHIW4';">
-                            <img class="music_icon" src="src/album/Kidding.jpg">
-                            <div class="musicRank_item_text">
-                                <div>이세계 아이돌</div>
-                                <div>Kidding</div>
-                            </div>
-                        </div>
                     </div>
                 </div>
             </div>
@@ -205,7 +137,7 @@
         function ready() {
             //로그인 조회
             let loginData = sessionStorage.getItem('id');
-            // console.log(loginData);
+            console.log(loginData);
             if(loginData == null){
                 document.getElementById('nav_playlist')
                 $('#nav_playlist').append(`
@@ -229,7 +161,7 @@
 
                         $('.idolRank').append(`
                         <div class="idolRank_item" onclick="location.href='${url}';">
-                            <img class="albumThumnail" src="src/album/ReWind.jpg">
+                            <img class="albumThumnail" src="src/icon/image_def.png">
                             <div class="idolRank_item_text">
                                 <div onclick="location.href='${url}';">${dataRes_name}</div>
                                 <div>조회수 : ${playCount}</div>
@@ -255,10 +187,9 @@
                         const playCount = item.playcount;
                         const url = item.url;
 
-
                         $('.musicRank').append(`
                         <div class="musicRank_item">
-                            <img class="music_icon" src="src/album/ReWind.jpg" onclick="location.href='${url}';">
+                            <img class="music_icon" src="src/icon/image_def.png" onclick="location.href='${url}';">
                             <div class="musicRank_item_text">
                                 <div>${artist}</div>
                                 <div onclick="location.href='${url}';">${name}</div>
@@ -273,6 +204,32 @@
                 
         //function Ready()
         }
+        //firebaseDB 세팅
+        // Firebase SDK 라이브러리 가져오기
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/9.22.0/firebase-app.js";
+        import { getFirestore, doc, deleteDoc, query, limit, collection, addDoc, orderBy, getDocs, getDoc } from "https://www.gstatic.com/firebasejs/9.22.0/firebase-firestore.js";
+        // Firebase 구성 정보 설정
+        const firebaseConfig = {
+            apiKey: "AIzaSyDUo3wGBYmzDE0daVh0twAmzZ2r8TzyrGE",
+            authDomain: "watual-f9224.firebaseapp.com",
+            projectId: "watual-f9224",
+            storageBucket: "watual-f9224.appspot.com",
+            messagingSenderId: "307021915043",
+            appId: "1:307021915043:web:ec35f5002d695d81a1f016",
+            measurementId: "G-248XS4LSEE"
+        };
+        // Firebase 인스턴스 초기화
+        const app = initializeApp(firebaseConfig);
+        const db = getFirestore(app);
+        let docs = await getDocs(collection(db, "rankingidol"));
+        docs.forEach((doc) => {
+            let row = doc.data();
+            
+        });
+
+
+
+
         //데이터 수신
         //데이터 전송
         function sendData() {
@@ -296,9 +253,7 @@
                 } else {
                     $('.nav_top_text').attr("value", "♬~노래 검색");
                 }
-
             })
-
         })
     </script>
 </body>
