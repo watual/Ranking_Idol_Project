@@ -1,2 +1,20 @@
 server:
-  port: 8081
+  port: 8083
+
+# database 연동 설정
+
+#spring:
+#  data:
+#    mongodb:
+#      #host: localhost
+#      #port: 27017
+#      #authentication의 경우 localhost는 상관없지만 다른 IP에서 접속하려면 설정 필요
+#      authentication-database: admin
+#      uri: mongodb+srv://qordnjsgk123455:0fvbKNTEGERwFAFE@watual.dzvyrti.mongodb.net/sample_mflix
+
+
+#  spring data jpa 설정
+#  jpa:
+#    database-platform: org.hibernate.dialect.
+#    open-in-view: false
+#    show-sql: true
