@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>게시글 작성</title>
+    <title>寃뚯떆湲� �옉�꽦</title>
     <script>
         function btnClick() {
             const searchBar = document.getElementById('searchBar');
@@ -15,11 +15,11 @@
             }
         }
         function searchResult() {
-            const apiKey = "AIzaSyBqjq6O85ZprEdYzzWZSy4iqQZ5CHCVr1s"; // 유효한 YouTube Data API 키를 입력합니다.
+            const apiKey = "AIzaSyBqjq6O85ZprEdYzzWZSy4iqQZ5CHCVr1s"; // �쑀�슚�븳 YouTube Data API �궎瑜� �엯�젰�빀�땲�떎.
             const apiUrl = `https://www.googleapis.com/youtube/v3/search`; // API URL
             const part = 'snippet';
             const q = document.getElementById('searchInput').value;
-            const url = `${apiUrl}?part=${part}&q=${q}&key=${apiKey}`; // 완성된 요청 URL
+            const url = `${apiUrl}?part=${part}&q=${q}&key=${apiKey}`; // �셿�꽦�맂 �슂泥� URL
             fetch(url)
                 .then((response) => response.json())
                 .then((data) => {
@@ -72,13 +72,13 @@
 <body>
     <div class="d-grid gap-2 col-6 mx-auto">
         <button id="btnSongAdd" class="btn btn-primary" type="button" onclick="btnClick()">
-            노래 추가하기
+            �끂�옒 異붽���븯湲�
         </button>
     </div>
     <div id="searchBar" class="searchBar" style="display: none">
-        <input id="searchInput" type="text" class="searchKeyword" placeholder="검색어 입력" />
+        <input id="searchInput" type="text" class="searchKeyword" placeholder="寃��깋�뼱 �엯�젰" />
         <button type="submit" class="btnSearchSubmit" onclick="searchResult()">
-            검색
+            寃��깋
         </button>
         <div id="result">
             
@@ -87,13 +87,13 @@
     <div id="searchResult"></div>
     <form action="/board/write" method="post">
         <div class="mb-3">
-            <label for="exampleFormControlInput1" class="form-label">제목</label>
-            <input type="email" class="form-control" id="exampleFormControlInput1" placeholder="제목을 입력하세요" />
+            <label for="exampleFormControlInput1" class="form-label">�젣紐�</label>
+            <input type="email" class="form-control" id="exampleFormControlInput1" placeholder="�젣紐⑹쓣 �엯�젰�븯�꽭�슂" />
             <label for="exampleFormControlTextarea1" class="form-label"></label>
             <textarea class="form-control" id="exampleFormControlTextarea1" rows="3"
-                placeholder="내용을 작성해주세요"></textarea>
+                placeholder="�궡�슜�쓣 �옉�꽦�빐二쇱꽭�슂"></textarea>
         </div>
-        <button id="submit" class="btn btn-primary" type="button">작성</button>
+        <button id="submit" class="btn btn-primary" type="button">�옉�꽦</button>
     </form>
 </body>
 
