@@ -28,7 +28,7 @@
         h3 {
 
             color: white;
-            margin: 100px auto 0px auto;
+            margin: 50px auto 0px auto;
             text-align: center;
         }
 
@@ -40,6 +40,19 @@
             border: 1px solid white;
             padding: 20px;
         }
+
+        .idbtn {
+            margin: 10px;
+        }
+
+
+        .form-control-plaintext{
+            background-color: white;
+        }
+        .check{
+            color: white;
+        }
+
     </style>
 
     <script type="module">
@@ -47,7 +60,7 @@
         import { initializeApp } from "https://www.gstatic.com/firebasejs/10.10.0/firebase-app.js";
         import { getAnalytics } from "https://www.gstatic.com/firebasejs/10.10.0/firebase-analytics.js";
         import { collection, addDoc } from "https://www.gstatic.com/firebasejs/10.10.0/firebase-firestore.js";
-        import { getDocs, getFirestore,setDoc ,doc} from "https://www.gstatic.com/firebasejs/10.10.0/firebase-firestore.js";
+        import { getDocs, getFirestore, setDoc, doc } from "https://www.gstatic.com/firebasejs/10.10.0/firebase-firestore.js";
 
         // TODO: Add SDKs for Firebase products that you want to use
         // https://firebase.google.com/docs/web/setup#available-libraries
@@ -69,23 +82,57 @@
         const analytics = getAnalytics(app);
         const db = getFirestore(app);
 
+        var idcheck = false;
+
+        $("#idbt").click(async function () {
+            let InputId = $('#id').val();
+            console.log(InputId);
+            let docs = await getDocs(collection(db, "user"));
+            let count = 0
+            docs.forEach((doc) => {
+                let row = doc.data();
+                let id = row['id'];
+
+                if (InputId === id) {
+                    alert("아이디 중복");
+                    count++;
+                }
+            });
+            if (count === 0) {
+                alert("중복이 없습니다");
+                idcheck = true;
+                $('.idbtn').html(`<span class="check">확인완료</span>`);
+                $('#idbox').html(`
+                <div class="form-floating mb-3">
+                    <input type="email" readonly class="form-control-plaintext" id="floatingPlaintextInput" placeholder="name@example.com" value="${InputId}">
+                    <label for="floatingPlaintextInput"></label>
+                </div>
+                `);
+            }
+        });
+
 
         $("#signupbt").click(async function () {
+            if (idcheck) {
+                let InputId = $('#floatingPlaintextInput').val();
+                let InputPwd = $("#pw").val();
+                let Inputurn = $("#urn").val();
+                let Inputemail = $("#email").val();
 
-            let InputId = $('#id').val();
-            let InputPwd = $("#pw").val();
-            let Inputurn = $("#urn").val();
-            let Inputemail = $("#email").val();
+                console.log(InputId, InputPwd, Inputurn, Inputemail);
 
-            console.log(InputId, InputPwd, Inputurn, Inputemail);
+                await setDoc(doc(db, "user", InputId), {
+                    id: InputId,
+                    password: InputPwd,
+                    username: Inputurn,
+                    email: Inputemail
+                });
+                alert('가입 완료');
+                location.href = 'MainPage.html';
+            } else {
+                alert("아이디 중복을 확인하세요")
+            }
 
-            await setDoc(doc(db, "user"), {
-                id: InputID,
-                password: InputPwd, 
-                username: Inputurn,
-                email: Inputemail
-            });
-            alert('가입 완료');
         });
 
         $("#loginpagebt").click(async function () {
@@ -110,9 +157,13 @@
 
     <h3>Sign Up</h3>
     <div id="postingbox" class="mypostingbox">
-        <div class="form-floating mb-3">
+        <div class="form-floating mb-3" id="idbox">
             <input type="email" class="form-control" id="id" placeholder="id">
             <label for="floatingInput">ID</label>
+        </div>
+        <div class="idbtn">
+            <button id="idbt" type="button" class="btn btn-outline-danger">중복확인</button>
+
         </div>
         <div class="form-floating mb-3">
             <input type="password" class="form-control" id="pw" placeholder="pw">
@@ -120,11 +171,11 @@
         </div>
         <div class="form-floating mb-3">
             <input type="email" class="form-control" id="urn" placeholder="username">
-            <label for="floatingInput">username</label>
+            <label for="floatingInput">USERNAME</label>
         </div>
         <div class="form-floating mb-3">
             <input type="email" class="form-control" id="email" placeholder="email">
-            <label for="floatingInput">e-mail</label>
+            <label for="floatingInput">E-MAIL</label>
         </div>
         <div class="mybtn">
             <button id="signupbt" type="button" class="btn btn-outline-danger">가입하기</button>

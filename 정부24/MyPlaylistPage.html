@@ -20,9 +20,7 @@
         </div>
         <div class="nav_top_profile">
             <div class="nav_top_profile_iden">
-                <a href="LoginPage.html">
-                    <img class="icon" src="src/icon/user.png">
-                </a>
+                <img class="icon" src="src/icon/user.png">
             </div>
             <div class="nav_top_profile_setting">
                 <img class="icon" src="src/icon/set.png">
@@ -63,7 +61,7 @@
                     </ul>
                 </div>
                 <div class="nav_left_top">
-                    <ul id="nav_playlist">
+                    <ul>
                         <!-- 테스트 -->
                         <li>
                             playList1
@@ -202,21 +200,9 @@
             <div></div>
         </div>
     </div>
-
-
     <script type="module" defer>
         document.addEventListener("DOMContentLoaded", ready);
         function ready() {
-            //로그인 조회
-            let loginData = sessionStorage.getItem('id');
-            // console.log(loginData);
-            if(loginData == null){
-                document.getElementById('nav_playlist')
-                $('#nav_playlist').append(`
-                        <li>
-                            playList_new
-                        </li>`);
-            }
             //아이돌 랭크 데이터
             let getTopArtists = "https://ws.audioscrobbler.com/2.0/?method=chart.gettopartists&api_key=54f23d667cf616502635a2d6dc54b1bb&format=json";
             fetch(getTopArtists)
@@ -274,14 +260,8 @@
                 .catch((error) => {
                     console.error('에러코드 : ', error);
                 });
-
-            if (sessionStorage.getItem('username')) {
-                let username = sessionStorage.getItem('username')
-                console.log(username);
-                $('.nav_top_profile_iden').html(`<span>${username}</span>`);
-
-            }
-
+                
+        //function Ready()
         }
         //데이터 수신
         //데이터 전송
@@ -310,8 +290,6 @@
             })
 
         })
-
-
     </script>
 </body>
 
