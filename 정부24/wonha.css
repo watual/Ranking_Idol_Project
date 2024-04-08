@@ -4,7 +4,6 @@
 }
 html,
 body {
-    height: 100vh;
     background-color: black;
 }
 /* 스크롤바 커스텀 */
@@ -190,8 +189,6 @@ a:hover {
     flex-direction: column;
     align-items: center;
     padding-top: 30px;
-
-
 }
 .titleText {
     font-size: 30px;
@@ -233,7 +230,7 @@ a:hover {
     margin: 10px;
     background: linear-gradient(45deg, rgb(51, 5, 51), rgb(56, 39, 7));
     overflow: auto;
-    height: calc(100vh - 550px);
+    max-height: 2000px;
 
 }
 .idolRank_item {
@@ -257,7 +254,7 @@ a:hover {
     margin: 10px;
     background: linear-gradient(45deg, rgb(7, 21, 43), rgb(12, 54, 31));
     overflow: auto;
-    height: calc(100vh - 550px);
+    max-height: 2000px;
 }
 .musicRank_item {
     margin-top: 10px;
@@ -279,10 +276,10 @@ a:hover {
     margin-right: 5px;
 }
 .searchPage {
-    height: calc(100vh - 150px);
+    max-height: 2000px;
 }
 .player{
-    position: absolute;
+    position: fixed;
     right: 0;
     bottom: 0;
     z-index: 50;
