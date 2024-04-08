@@ -5,8 +5,7 @@
 	- 색상
 		color: red;
 		background-color: green;
-	- 정렬
-		justify-content: center;
+
 	- 크기
 		width: 100%;
 		height: 100wh;
@@ -14,7 +13,51 @@
 		padding-left: 10px;
 	- 외곽선
 		outline: dashed 1px black;
+	- 정렬
+		align-items: center;
+		justify-content: center;
+		margin-left: auto; margin-right: auto;
+		vertical-align: middle;	// 인라인 레벨 요소와 테이블 셀 요소 내부의 수직 정렬을 지정하
+		text-align: center;
+		display: table-cell;
+		grid-area: 1 / 1 / 2 / 2;
 	- 위치
+		line-height: 100px;	// white-space: nowrap; 자동 줄바꿈 비활성화
 		position: relative;
 		position: absolute;
-		top: 50%;
+		top: 50%; transform: translateY(-50%);
+
+                li:hover {
+                    opacity:0.5;	// 투명도 조절
+                    cursor:pointer;	// 마우스 올렸을때 마우스 모양
+                    transition: all 0.5s ease-out;	// 애니메이션 속도
+				}
+
+#JavsScript_jquery
+
+	- 클릭 이벤트
+		$(document).on("click","#아이디", function() {
+            alert("입력1");
+         });
+		 /* $(document)를 사용하고 있어 이전처럼 복수 대상 지정을 못한다. 이때는 event 객체를 사용하여 제어한다.
+		 기존 클릭 이벤트 id1, id2를 제어한다고 가정했을 때 event의 target으로 해당 id를 판별하여 제어가 가능하다. */
+		$(document).on(click: function(e) {
+            console.log(e.target);
+         });
+
+        $('#아이디1, #아이디2').click(function(){
+            alert("입력2?");
+        });
+
+
+jQuery 에서는 
+$("#test").val("입력값"); 
+형식입니다 
+api.jquery.com 에서 자세한 내용은 검색으로~ 
+
+value 속성으로 넣으려면
+$("#test")[0].value="입력값";
+으로 넣으면 됩니다. 
+
+
+CSS 결합자

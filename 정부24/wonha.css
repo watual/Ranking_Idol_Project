@@ -1,83 +1,286 @@
-*{
-    margin:0;
-    padding:0;
+* {
+    margin: 0;
+    padding: 0;
 }
+html,
 body {
-    max-width: 100vw;
-    min-height: 100vh;
-    margin: 0 auto;
+    background-color: black;
 }
+/* 스크롤바 커스텀 */
+*::-webkit-scrollbar {
+    width: 10px;
+}
+
+*::-webkit-scrollbar-track {
+    background-color: grey;
+}
+
+*::-webkit-scrollbar-thumb {
+    background-color: rgb(24, 24, 24);
+}
+
 a {
     text-decoration-line: none;
     color: white;
 }
+
 a:hover {
     color: white;
 }
 
+.icon {
+    width: 27px;
+    height: 27px;
+    margin-right: 5px;
+}
+
+.albumThumnail {
+    height: 200px;
+}
 .full_size {
-    width: 100vw;
-    height: 100vh;
+    width: 100%;
+    height: 100%;
     display: flex;
     flex-direction: column;
+    color: white;
+}
+.logo {
+    position: absolute;
+    width: 250px;
+    height: 115px;
+    z-index: 10;
+    padding: 10px;
+    display: flex;
+    justify-content: center;
 
-
-    .nav_bar_top {
-        position: relative;
-        width: 100%;
-        height: max-content;
-        background-color: black;
-        padding-left: 2%;
-        padding-right: 2%;
+    img {
+        width: 200px;
     }
 
-    .mainDiv {
-        width: 100%;
-        height: 100%;
-        background-color: rgb(31, 32, 28);
+}
+.nav_top {
+    position: relative;
+    min-height: 100px;
+    margin-left: 250px;
+    padding-left: 50px;
+    overflow: hidden;
+    width: calc(100vw - 270px);
+    border-bottom-style: solid;
+    border-color: rgb(50, 50, 50);
+
+}
+.nav_top_item {
+    margin: 0 auto 0 auto;
+    min-width: 400px;
+    height: 100%;
+
+}
+.nav_top_text {
+    position: absolute;
+    transform: translateY(50%);
+    min-width: 150px;
+    padding: 10px;
+    pointer-events: none;
+    font-size: 1em;
+    background-color: black;
+    border-style: none;
+    color: white;
+}
+
+.nav_top_search {
+    position: absolute;
+    transform: translateY(50%);
+    z-index: 10;
+    opacity: 0.5;
+    width: 400px;
+    height: 47px;
+    background-color: rgb(20, 20, 20);
+    border-radius: 10px;
+    border: 1px solid rgb(50, 50, 50);
+    padding: 10px;
+    outline: none;
+    color: white
+}
+.nav_top_search_submit {
+    position: absolute;
+    transform: translateY(50%);
+    width: 50px;
+    padding: 10px;
+    pointer-events: painted;
+    background-color: black;
+    color: white;
+    border-width: 0;
+    margin-left: 400px;
+}
+.nav_top_profile {
+    position: fixed;
+    height: 90px;
+    padding-top: 28px;
+    right: 0;
+    width: 100px;
+    z-index: 10;
+    display: flex;
+    background-color: black;
+    z-index: 15;
+
+    img {
+        margin-left: 15px;
+    }
+
+}
+.mainDiv {
+    width: 100vw;
+    height: 100%;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
 
 
-        .nav_bar_left {
-            color: white;
-            position: absolute;
-            height: 100%;
-            width: 250px;
-            background-color: rgb(27, 122, 95);
+}
+.nav_left {
+    height: 100%;
+    min-width: 250px;
+    padding-left: 20px;
+    padding-right: 20px;
+    padding-top: 50px;
+    border-width: 1px;
+    border-style: solid;
+    border-color: rgb(50, 50, 50);
 
-            .nav_bar_left_top {
-                background-color: black;
-                width: 100%;
 
-                li {
-                    width: 100%;
-                    display: flex;
-                    justify-content: left;
-                    height: 50px;
-                    line-height: 50px;
-                }
-            }
-            
+}
+.nav_left_top {
+    background-color: black;
+    width: 100%;
+    padding: 0;
+    margin: 0;
+
+
+    ul {
+        padding: 0;
+        margin: 0;
+
+        li {
+            display: flex;
+            justify-content: left;
+            height: 50px;
+            line-height: 50px;
+            border-radius: 10px;
+            align-items: center;
+            text-align: center;
+            text-indent: .1em;
+            padding-left: 8px;
+
         }
-        .mainContent {
-            background-color: black;
+
+        li:hover {
+            cursor: pointer;
+            transition: all 0.2s ease-out;
+            background-color: rgb(50, 50, 50);
         }
     }
+}
+.mainContent1 {
+    height: 100%;
+    width: calc(100vw - 250px);
+    margin: 0;
+    background-color: black;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding-top: 30px;
+}
+.titleText {
+    font-size: 30px;
+    margin-left: 5%;
+    margin-top: 5px;
+    margin-bottom: 5px;
+    align-self: flex-start;
+}
+.titleText_rec{
+    align-self: flex-start;
+    padding-left: 40px;
+}
+.recommendSong {
+    display: flex;
+    align-items: center;
+    justify-content: left;
+    width: 80%;
+    margin: 0 50px 50px 50px;
+    overflow: auto;
+    height: 300px;
+    min-height: 300px;
 
+}
+.recommendSong_item {
+    display: flex;
+    flex-direction: column;
+    padding: 10px;
+}
+.mainContent2 {
+    min-height: 700px;
+    width: calc(100vw - 250px);
+    max-width: 90%;
+    display: grid;
+    grid-template-columns: repeat(2, 50%);
+}
+.idolRank {
+    display: flex;
+    flex-direction: column;
+    margin: 10px;
+    background: linear-gradient(45deg, rgb(51, 5, 51), rgb(56, 39, 7));
+    overflow: auto;
+    max-height: 2000px;
 
+}
+.idolRank_item {
+    margin-top: 10px;
+    margin-bottom: 10px;
+    display: flex;
+    flex-direction: row;
+}
+.idolRank_item_text {
+    display: flex;
+    flex-direction: column;
+    padding: 10px;
 
-    .cus-nav-bar {
-        color: chartreuse;
+    div {
+        margin: 10px;
     }
+}
+.musicRank {
+    display: flex;
+    flex-direction: column;
+    margin: 10px;
+    background: linear-gradient(45deg, rgb(7, 21, 43), rgb(12, 54, 31));
+    overflow: auto;
+    max-height: 2000px;
+}
+.musicRank_item {
+    margin-top: 10px;
+    margin-bottom: 10px;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+.idolRank_item_text {
+    display: flex;
+    flex-direction: column;
+    padding: 10px;
 
-    .cus-nav-bar:hover {
-        color: pink;
-    }
 
-    /* div class="nav_bar_top" > 
-    nav class="navbar navbar-expand-lg bg-body-tertiary" > 
-        div class="container-fluid" > 
-            a class="navbar-brand cus-nav-logo" */
-    .logo {
-        width: 150px;
-    }
+}
+.music_icon {
+    width: 35px;
+    height: 35px;
+    margin-right: 5px;
+}
+.searchPage {
+    max-height: 2000px;
+}
+.player{
+    position: fixed;
+    right: 0;
+    bottom: 0;
+    z-index: 50;
 }

@@ -29,8 +29,10 @@
         <div class="nav_top" id="div1"> <!--상단 nav bar-->
             <div class="nav_top_item">
                 <input class="nav_top_text" value="♬~노래 검색">
-                <input type="text" name="searchText" class="nav_top_search" required="required">
-                <input type="button" class="nav_top_search_submit" value="▷">
+                <form action="SearchPage.html" method="post" id="formid" name="formname">
+                    <input type="text" name="searchmsg" class="nav_top_search" required="required">
+                    <input type="submit" class="nav_top_search_submit" value="▷">
+                </form>
             </div>
         </div>
         <div class="mainDiv">
@@ -67,7 +69,7 @@
                             playList1
                         </li>
                         <li>
-                            playList2
+                            playList22
                         </li>
                         <li>
                             playList3
@@ -203,7 +205,7 @@
     <script type="module" defer>
         document.addEventListener("DOMContentLoaded", ready);
         function ready() {
-            //아이돌 랭크 데이터
+            $('.nav_top_search').attr("value", "");
             let getTopArtists = "https://ws.audioscrobbler.com/2.0/?method=chart.gettopartists&api_key=54f23d667cf616502635a2d6dc54b1bb&format=json";
             fetch(getTopArtists)
                 .then((response) => response.json())
@@ -232,7 +234,6 @@
                     console.error('에러코드 : ', error);
                 });
 
-            //노래 랭크 데이터
             let getTopTracks = "https://ws.audioscrobbler.com/2.0/?method=chart.gettoptracks&api_key=54f23d667cf616502635a2d6dc54b1bb&format=json";
             fetch(getTopTracks)
                 .then((response) => response.json())
@@ -263,33 +264,23 @@
                 
         //function Ready()
         }
-        //데이터 수신
-        //데이터 전송
-        function sendData() {
-            const sendData = document.getElementsByName("searchText")[0].value;
-            sessionStorage.setItem('item1', sendData);
-            location.href = 'SearchPage.html';
-        }
+        function press(f){
+            if(f.keyCode == 13){
+                $('#formid').submit();
 
-        $(function () {
-            $('.nav_top_search').on('input', function (f) {
-                if ($('.nav_top_search').val() != '') {
-                    $('.nav_top_search_submit').click(function () {
-                        sendData();
-                    });
+
+            }
+        }
+        $(function() {
+            $('.nav_top_search').on('input', function(){
+                if($('.nav_top_search').val()!=''){
                     $('.nav_top_text').attr("value", "");
-                    addEventListener('keydown', function (e) {
-                        if ((e.code == 'Enter') || (e.code == 'NumpadEnter') && $('.nav_top_search').val() != '') {
-                            sendData();
-                        }
-                    })
-                } else {
+                }else{
                     $('.nav_top_text').attr("value", "♬~노래 검색");
                 }
-
+                
             })
-
-        })
+        })        
     </script>
 </body>
 
