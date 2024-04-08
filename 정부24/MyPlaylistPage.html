@@ -61,7 +61,7 @@
                     </ul>
                 </div>
                 <div class="nav_left_top">
-                    <ul id="nav_playlist">
+                    <ul>
                         <!-- 테스트 -->
                         <li>
                             playList1
@@ -203,16 +203,6 @@
     <script type="module" defer>
         document.addEventListener("DOMContentLoaded", ready);
         function ready() {
-            //로그인 조회
-            let loginData = sessionStorage.getItem('id');
-            // console.log(loginData);
-            if(loginData == null){
-                document.getElementById('nav_playlist')
-                $('#nav_playlist').append(`
-                        <li>
-                            playList_new
-                        </li>`);
-            }
             //아이돌 랭크 데이터
             let getTopArtists = "https://ws.audioscrobbler.com/2.0/?method=chart.gettopartists&api_key=54f23d667cf616502635a2d6dc54b1bb&format=json";
             fetch(getTopArtists)
