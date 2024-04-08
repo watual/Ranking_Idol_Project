@@ -20,7 +20,9 @@
         </div>
         <div class="nav_top_profile">
             <div class="nav_top_profile_iden">
-                <img class="icon" src="src/icon/user.png">
+                <a href="LoginPage.html">
+                    <img class="icon" src="src/icon/user.png">
+                </a>
             </div>
             <div class="nav_top_profile_setting">
                 <img class="icon" src="src/icon/set.png">
@@ -200,6 +202,8 @@
             <div></div>
         </div>
     </div>
+
+
     <script type="module" defer>
         document.addEventListener("DOMContentLoaded", ready);
         function ready() {
@@ -260,8 +264,14 @@
                 .catch((error) => {
                     console.error('에러코드 : ', error);
                 });
-                
-        //function Ready()
+
+            if (sessionStorage.getItem('username')) {
+                let username = sessionStorage.getItem('username')
+                console.log(username);
+                $('.nav_top_profile_iden').html(`<span>${username}</span>`);
+
+            }
+
         }
         //데이터 수신
         //데이터 전송
@@ -290,6 +300,8 @@
             })
 
         })
+
+
     </script>
 </body>
 
