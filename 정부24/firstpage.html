@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>musicList</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous" />
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+
+    <title>musicList</title>
+    <style>
+        body {
+            background: black;
+            height: 6000px;
+            font-family: 'nanumsquare';
+        }
+
+        div {
+            margin-top: 1000px;
+            color: white;
+            text-align: center;
+            opacity: 0;
+            transition: all 0.5s;
+
+            h1 {
+                color: white;
+                font-size: 15px;
+            }
+        }
+    </style>
+    <script>
+        document.addEventListener("DOMContentLoaded", ready);
+        function ready() {
+
+            let observer = new IntersectionObserver((e) => {
+                e.forEach((ob) => {
+                    if (ob.isIntersecting) {
+                        ob.target.style.opacity = 1;
+                        // 박스.target.style.transform='rotate(0deg)';//이상한거
+                    }
+                    //박스.intersectionRatio //박스가 반쯤 보이면 0.5 출력
+
+                })
+            })
+            let div = document.querySelectorAll('div');
+            console.log(div);
+            observer.observe(div[0]) // 감시
+            observer.observe(div[1])
+            observer.observe(div[2])
+            observer.observe(div[3])
+        }
+    </script>
+</head>
+
+<body>
+    <div>
+        <h1>정부 24 사전캠프 미니미니 프로젝트</h1>
+    </div>
+    <div>
+        <h1>Ranking Idol Project</h1>
+    </div>
+    <div>
+        <h1>1</h1>
+    </div>
+    <div>
+        <h1>2</h1>
+    </div>
+
+</body>
+
+</html>
