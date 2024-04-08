@@ -13,21 +13,27 @@
     <style>
         body {
             background: black;
-            height: 6000px;
+            height: 400vh;
             font-family: 'nanumsquare';
         }
 
         div {
-            margin-top: 1000px;
+            align-items: center;
+            display: flex;
+            justify-content: center;
             color: white;
             text-align: center;
             opacity: 0;
-            transition: all 0.5s;
+            transition: all 4s;
+            height: 100vh;
+        }
 
-            h1 {
-                color: white;
-                font-size: 15px;
-            }
+        .Government {
+            background-image: url("src/background/Goverment24.png");
+            background-position: center;
+            background-repeat: no-repeat;
+            background-size: contain;
+            opacity: 0;
         }
     </style>
     <script>
@@ -38,9 +44,9 @@
                 e.forEach((ob) => {
                     if (ob.isIntersecting) {
                         ob.target.style.opacity = 1;
-                        // 박스.target.style.transform='rotate(0deg)';//이상한거
+                        //ob.target.style.transform='rotate(0deg)';//이상한거
                     }
-                    //박스.intersectionRatio //박스가 반쯤 보이면 0.5 출력
+                    ob.intersectionRatio //박스가 반쯤 보이면 0.5 출력
 
                 })
             })
@@ -55,7 +61,7 @@
 </head>
 
 <body>
-    <div>
+    <div class = "Government">
         <h1>정부 24 사전캠프 미니미니 프로젝트</h1>
     </div>
     <div>
