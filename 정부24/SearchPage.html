@@ -67,7 +67,7 @@
                             playList1
                         </li>
                         <li>
-                            playList22
+                            playList2
                         </li>
                         <li>
                             playList3
@@ -98,8 +98,14 @@
                 </div>
             </div>
         </div>
-        <div class="player">
-            <iframe width="560" height="315" src="https://www.youtube.com/embed/SXE-gIU3yJs?si=OaE43rSxb1shQSqT" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+        <!-- https://www.youtube.com/embed/eVLI_YUSScg?si=HuDqmIJ9zycvc63c -->
+        <!-- https://www.youtube.com/embed/SXE-gIU3yJs?si=i1vZpBkaN45k6ru- -->
+        <div class="player" id="player" style="display: flex;">
+            <div class="player_off"> X </div>
+            <iframe width="560" height="315" src="https://www.youtube.com/embed/eVLI_YUSScg?si=HuDqmIJ9zycvc63c"
+                title="YouTube video player" frameborder="0"
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
         </div>
     </div>
     </div>
@@ -177,6 +183,13 @@
                 .catch((error) => {
                     console.error('에러코드 : ', error);
                 });
+
+            $('.player_off').click(function () {
+                const btn = document.getElementById('player');
+                btn.style.visibility = 'hidden';
+            });
+
+            // End of : function ready()
         }
         //데이터 수신
         //데이터 전송
