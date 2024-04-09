@@ -32,9 +32,11 @@
             opacity: 0;
 
         }
+
         h1 {
             font-size: 50px;
         }
+
         .img1 {
             position: absolute;
             background-image: url("src/background/Goverment24.png");
@@ -50,20 +52,21 @@
         }
     </style>
     <script>
+        window.scrollTo({ top: 0, left: 0, behavior: 'instant' });
         document.addEventListener("DOMContentLoaded", ready);
-        function ready() {
 
+        function ready() {
             let observer = new IntersectionObserver((e) => {
                 e.forEach((ob) => {
                     if (ob.isIntersecting) {
                         console.log(ob.target);
                         if (ob.target.className == 'img1') {
-                                ob.target.style.opacity = 0.5;
-                                setTimeout(function() {
-                                    let changeBG = 'url("src/logo.png")';
-                                    ob.target.style.backgroundImage = changeBG;
-                            },4000
-                        )
+                            ob.target.style.opacity = 0.5;
+                            setTimeout(function () {
+                                let changeBG = 'url("src/logo.png")';
+                                ob.target.style.backgroundImage = changeBG;
+                            }, 4000
+                            )
                         } else {
                             ob.target.style.opacity = 1;
                         }
@@ -73,6 +76,7 @@
 
                 })
             })
+
             let div = document.querySelectorAll('div');
             // console.log(div);
             observer.observe(div[0]) // 감시
@@ -80,14 +84,17 @@
             observer.observe(div[2])
             observer.observe(div[3])
 
-            $(window).scroll(function() {
+            $(window).scroll(function () {
                 var scrT = $(window).scrollTop();
-                console.log(scrT); //스크롤 값 확인용
-                if (scrT == $(document).height() - $(window).height()) {
+                let as = $(document).height() - $(window).height();
+                // console.log(scrT +" / " + $(document).height() +" / "+ $(window).height()+ " / "+as); //스크롤 값 확인용
+                // console.log(document.body.scrollHeight);
+                if (scrT >= $(document).height() - $(window).height() - 1) {
                     //스크롤이 끝에 도달했을때 실행될 이벤트
-                    setTimeout(function(last) {
+                    setTimeout(function (last) {
                         // 다른 HTML 파일로 이동
                         sessionStorage.setItem('first', 'first');
+                        history.pushState(null, "");
                         window.location.href = 'MainPage.html';
                     }, 500);
                 } else {
@@ -109,10 +116,9 @@
     <div>
         <h1>1</h1>
     </div>
-    <div >
-        <h1 class = "last">2</h1>
+    <div>
+        <h1 class="last">2</h1>
     </div>
-
 </body>
 
 </html>

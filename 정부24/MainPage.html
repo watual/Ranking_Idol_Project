@@ -25,7 +25,7 @@
                 </a>
             </div>
             <div class="nav_top_profile_setting">
-                <img class="icon" src="src/icon/set.png">
+                <img class="icon setIcon" src="src/icon/set.png">
             </div>
         </div>
         <div class="nav_top" id="div1"> <!--상단 nav bar-->
@@ -152,6 +152,10 @@
         //문서 로드, 함수 호출
         document.addEventListener("DOMContentLoaded", ready);
         function ready() {
+            $('.setIcon').click(function () {
+                alert('asdf');
+                window.history.back();
+            });
             //창 그라데이션 출력
             document.getElementsByClassName('full_size');
             
