@@ -79,6 +79,21 @@
             observer.observe(div[1])
             observer.observe(div[2])
             observer.observe(div[3])
+
+            $(window).scroll(function() {
+                var scrT = $(window).scrollTop();
+                console.log(scrT); //스크롤 값 확인용
+                if (scrT == $(document).height() - $(window).height()) {
+                    //스크롤이 끝에 도달했을때 실행될 이벤트
+                    setTimeout(function(last) {
+                        // 다른 HTML 파일로 이동
+                        sessionStorage.setItem('first', 'first');
+                        window.location.href = 'MainPage.html';
+                    }, 500);
+                } else {
+                    //아닐때 이벤트
+                }
+            });
         }
     </script>
 </head>
@@ -94,8 +109,8 @@
     <div>
         <h1>1</h1>
     </div>
-    <div>
-        <h1>2</h1>
+    <div >
+        <h1 class = "last">2</h1>
     </div>
 
 </body>
