@@ -130,7 +130,7 @@ a:hover {
 }
 .mainDiv {
     width: 100vw;
-    height: 2500px;
+    max-height: 2500px;
     display: flex;
     flex-direction: row;
     justify-content: space-between;

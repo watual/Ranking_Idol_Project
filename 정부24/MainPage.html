@@ -62,27 +62,9 @@
                 </div>
                 <div class="nav_left_top">
                     <ul id="nav_playlist">
-                        <!-- 테스트 -->
+                        <!-- 재생목록 -->
                         <li>
                             playList1
-                        </li>
-                        <li>
-                            playList2
-                        </li>
-                        <li>
-                            playList3
-                        </li>
-                        <li>
-                            playList4
-                        </li>
-                        <li>
-                            playList5
-                        </li>
-                        <li>
-                            playList6
-                        </li>
-                        <li>
-                            playList7
                         </li>
                     </ul>
                 </div>
@@ -132,13 +114,49 @@
             <div></div>
         </div>
     </div>
+    <!-- ------------------------스크립트----------------------------- -->
     <script type="module" defer>
+        //firebaseDB 세팅
+        // Firebase SDK 라이브러리 가져오기
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/9.22.0/firebase-app.js";
+        import { getFirestore, doc, deleteDoc, query, limit, collection, addDoc, orderBy, getDocs, getDoc } from "https://www.gstatic.com/firebasejs/9.22.0/firebase-firestore.js";
+        // Firebase 구성 정보 설정
+        const firebaseConfig = {
+            apiKey: "AIzaSyDUo3wGBYmzDE0daVh0twAmzZ2r8TzyrGE",
+            authDomain: "watual-f9224.firebaseapp.com",
+            projectId: "watual-f9224",
+            storageBucket: "watual-f9224.appspot.com",
+            messagingSenderId: "307021915043",
+            appId: "1:307021915043:web:ec35f5002d695d81a1f016",
+            measurementId: "G-248XS4LSEE"
+        };
+        // Firebase 인스턴스 초기화
+        const app = initializeApp(firebaseConfig);
+        const db = getFirestore(app);
+        let docs;
+        // Firebase DB, Table 호출
+        (async () => {
+            docs = await getDocs(collection(db,"rankingidol"));
+            document.addEventListener("DOMContentLoaded", function () {
+                console.log(docs);
+                //index, emptyIndex, 0{createUser, artist, link, music }, 1, 2, ...
+                // docs.playlist.forEach((i) => {
+                //     let dataPlaylist = i.data();
+                //     alert(dataPlaylist);
+                // });
+            });
+        })();
+
+        //문서 로드, 함수 호출
         document.addEventListener("DOMContentLoaded", ready);
         function ready() {
+            //창 그라데이션 출력
+            document.getElementsByClassName('full_size');
+            
             //로그인 조회
             let loginData = sessionStorage.getItem('id');
-            console.log(loginData);
-            if(loginData == null){
+            // console.log(loginData);
+            if (loginData == null) {
                 document.getElementById('nav_playlist')
                 $('#nav_playlist').append(`
                         <li>
@@ -147,17 +165,17 @@
             }
             //아이돌 랭크 데이터
             let getTopArtists = "https://ws.audioscrobbler.com/2.0/?method=chart.gettopartists&api_key=54f23d667cf616502635a2d6dc54b1bb&format=json";
+            // console.log(getTopArtists);
             fetch(getTopArtists)
                 .then((response) => response.json())
                 .then(async (data) => {
+                    console.log(data);
                     const dataResponse = data.artists.artist;
-
                     dataResponse.forEach(item => {
                         const dataRes_name = item.name;
                         //const dataRes_image = item.image[0]['#text'];
                         const playCount = item.playcount;
                         const url = item.url;
-
 
                         $('.idolRank').append(`
                         <div class="idolRank_item" onclick="location.href='${url}';">
@@ -201,35 +219,11 @@
                 .catch((error) => {
                     console.error('에러코드 : ', error);
                 });
-                
-        //function Ready()
+
+            //재생 목록 호출
+
+            //function Ready()
         }
-        //firebaseDB 세팅
-        // Firebase SDK 라이브러리 가져오기
-        import { initializeApp } from "https://www.gstatic.com/firebasejs/9.22.0/firebase-app.js";
-        import { getFirestore, doc, deleteDoc, query, limit, collection, addDoc, orderBy, getDocs, getDoc } from "https://www.gstatic.com/firebasejs/9.22.0/firebase-firestore.js";
-        // Firebase 구성 정보 설정
-        const firebaseConfig = {
-            apiKey: "AIzaSyDUo3wGBYmzDE0daVh0twAmzZ2r8TzyrGE",
-            authDomain: "watual-f9224.firebaseapp.com",
-            projectId: "watual-f9224",
-            storageBucket: "watual-f9224.appspot.com",
-            messagingSenderId: "307021915043",
-            appId: "1:307021915043:web:ec35f5002d695d81a1f016",
-            measurementId: "G-248XS4LSEE"
-        };
-        // Firebase 인스턴스 초기화
-        const app = initializeApp(firebaseConfig);
-        const db = getFirestore(app);
-        let docs = await getDocs(collection(db, "rankingidol"));
-        docs.forEach((doc) => {
-            let row = doc.data();
-            
-        });
-
-
-
-
         //데이터 수신
         //데이터 전송
         function sendData() {
