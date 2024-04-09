@@ -94,6 +94,7 @@
                     alert("로그인 성공")
                     location.href = 'MainPage.html';
                     loginIdx++;
+                    sessionStorage.setItem('username', username);
                 } 
             });
             if (loginIdx === 0) alert("아이디 또는 비밀번호가 틀립니다.");
@@ -148,15 +149,5 @@
 
 
 
-
-
-
-
-
-
-
-
-
 </body>
-
 </html>
