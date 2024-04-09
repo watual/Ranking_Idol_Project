@@ -46,13 +46,13 @@
         }
 
 
-        .form-control-plaintext{
+        .form-control-plaintext {
             background-color: white;
         }
-        .check{
+
+        .check {
             color: white;
         }
-
     </style>
 
     <script type="module">
@@ -82,57 +82,84 @@
         const analytics = getAnalytics(app);
         const db = getFirestore(app);
 
-        var idcheck = false;
-
-        $("#idbt").click(async function () {
-            let InputId = $('#id').val();
-            console.log(InputId);
-            let docs = await getDocs(collection(db, "user"));
-            let count = 0
-            docs.forEach((doc) => {
-                let row = doc.data();
-                let id = row['id'];
-
-                if (InputId === id) {
-                    alert("아이디 중복");
-                    count++;
-                }
-            });
-            if (count === 0) {
-                alert("중복이 없습니다");
-                idcheck = true;
-                $('.idbtn').html(`<span class="check">확인완료</span>`);
-                $('#idbox').html(`
-                <div class="form-floating mb-3">
-                    <input type="email" readonly class="form-control-plaintext" id="floatingPlaintextInput" placeholder="name@example.com" value="${InputId}">
-                    <label for="floatingPlaintextInput"></label>
-                </div>
-                `);
-            }
-        });
 
 
         $("#signupbt").click(async function () {
-            if (idcheck) {
-                let InputId = $('#floatingPlaintextInput').val();
-                let InputPwd = $("#pw").val();
-                let Inputurn = $("#urn").val();
-                let Inputemail = $("#email").val();
+            //입력 값 로드
+            let InputId = $('#id').val();
+            let Inputemail = $('#email').val();
+            let InputPwd = $("#pw").val();
+            let InputCfpwd = $("#cfpw").val();
+            let Inputurn = $("#urn").val();
 
-                console.log(InputId, InputPwd, Inputurn, Inputemail);
+            console.log(InputId, InputPwd, InputCfpwd, Inputurn, Inputemail);
 
-                await setDoc(doc(db, "user", InputId), {
-                    id: InputId,
-                    password: InputPwd,
-                    username: Inputurn,
-                    email: Inputemail
+            //중복체크,비밀번호 확인 용 변수
+            let idcheck = false;
+            let emailcheck = false;
+            let cfmpw = false;
+
+            console.log(idcheck, emailcheck, cfmpw);
+
+            //파이어베이스 데이터 로드
+            let docs = await getDocs(collection(db, "user"));
+
+            //입력 확인
+            if (!InputId || !Inputemail || !InputPwd || !InputCfpwd || !Inputurn) {
+                alert("빈칸이 있습니다. 모두 입력해주세요");
+            } 
+            else {
+                //아이디 중복 확인
+                let count = 0;
+                docs.forEach((doc) => {
+                    let row = doc.data();
+                    let id = row['id'];
+
+                    if (InputId === id) {
+                        alert("아이디 중복. 다른 아이디를 입력하세요.");
+                        count++;
+                    }
                 });
-                alert('가입 완료');
-                location.href = 'MainPage.html';
-            } else {
-                alert("아이디 중복을 확인하세요")
-            }
+                if (count === 0) { idcheck = true; }
 
+                
+                //이메일 중복 확인
+                count = 0
+                docs.forEach((doc) => {
+                    let row = doc.data();
+                    let email = row['email'];
+                    if (Inputemail === email) {
+                        alert("이메일 중복. 다른 이메일을 입력하세요.");
+                        count++;
+                    }
+                });
+                if (count === 0) { emailcheck = true; }
+
+
+                //비밀번호 확인
+                if (InputPwd !== InputCfpwd) {
+                    alert("비밀번호와 확인 비밀번호가 다릅니다. 다시 확인하세요.")
+                } else {
+                    cfmpw = true;
+                }
+
+                console.log(idcheck, emailcheck, cfmpw);
+
+                //파이어베이스 데이터 추가
+                if (idcheck && emailcheck && cfmpw) {
+
+                    console.log(InputId, InputPwd, Inputurn, Inputemail);
+
+                    await setDoc(doc(db, "user", InputId), {
+                        id: InputId,
+                        password: InputPwd,
+                        username: Inputurn,
+                        email: Inputemail
+                    });
+                    alert('가입 완료');
+                    location.href = 'LoginPage.html';
+                }
+            }
         });
 
         $("#loginpagebt").click(async function () {
@@ -161,13 +188,14 @@
             <input type="email" class="form-control" id="id" placeholder="id">
             <label for="floatingInput">ID</label>
         </div>
-        <div class="idbtn">
-            <button id="idbt" type="button" class="btn btn-outline-danger">중복확인</button>
 
-        </div>
         <div class="form-floating mb-3">
             <input type="password" class="form-control" id="pw" placeholder="pw">
             <label for="floatingInput">PASSWORD</label>
+        </div>
+        <div class="form-floating mb-3">
+            <input type="password" class="form-control" id="cfpw" placeholder="pw">
+            <label for="floatingInput">CONFIRM PASSWORD</label>
         </div>
         <div class="form-floating mb-3">
             <input type="email" class="form-control" id="urn" placeholder="username">
