@@ -130,7 +130,7 @@ a:hover {
 }
 .mainDiv {
     width: 100vw;
-    height: 100%;
+    height: 2500px;
     display: flex;
     flex-direction: row;
     justify-content: space-between;
@@ -230,7 +230,7 @@ a:hover {
     margin: 10px;
     background: linear-gradient(45deg, rgb(51, 5, 51), rgb(56, 39, 7));
     overflow: auto;
-    max-height: 2000px;
+    height: 100%;
 
 }
 .idolRank_item {
@@ -254,7 +254,7 @@ a:hover {
     margin: 10px;
     background: linear-gradient(45deg, rgb(7, 21, 43), rgb(12, 54, 31));
     overflow: auto;
-    max-height: 2000px;
+    height:100%;
 }
 .musicRank_item {
     margin-top: 10px;
