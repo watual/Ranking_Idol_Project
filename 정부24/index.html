@@ -134,7 +134,7 @@
             <label for="floatingInput">추천 이유</label>
         </div>
         <button id="postingbtn" type="button" class="btn btn-danger">기록하기</button>
-        <button id="helloas" type="button" class="btn btn-danger" value="주연님 분신술">여기를 눌러2</button>
+        <button id="asdf" type="button" class="btn btn-danger" value="주연님 분신술">여기를 눌러2</button>
     </div>
 
     <div class="mycards">
@@ -147,7 +147,7 @@
         // Firebase SDK 라이브러리 가져오기
         import { initializeApp } from "https://www.gstatic.com/firebasejs/9.22.0/firebase-app.js";
         import { getFirestore } from "https://www.gstatic.com/firebasejs/9.22.0/firebase-firestore.js";
-        import { doc, deleteDoc, query, limit, collection, addDoc, orderBy, getDocs, getDoc } from "https://www.gstatic.com/firebasejs/9.22.0/firebase-firestore.js";
+        import { doc, deleteDoc, query, limit, collection, addDoc, orderBy, getDocs, getDoc, setDoc } from "https://www.gstatic.com/firebasejs/9.22.0/firebase-firestore.js";
 
         // Firebase 구성 정보 설정
         const firebaseConfig = {
@@ -176,7 +176,7 @@
             let comment = row['comment'];
             let star = row['star'];
             let docs_id = doc.id;
-            console.log(image, title, star, comment);
+            // console.log(image, title, star, comment);
             let temp_html = `
                 <div class="col">
                     <div class="card h-100">
@@ -193,19 +193,14 @@
 
             $('#card').append(temp_html);
         });
-
-
-        let asdf123 = document.getElementById('helloas');
-        asdf123.addEventListener('click', function (event) {
-            alert('asdfasdf' + event.target.value);
-        })
-
         $("#pressthis2").click(async function () {
             alert("asdfasdf");
         });
         $("#pressthis").click(async function () {
             alert("asdfasdf");
         });
+
+
         $('.deletebtn').click(async function () {
             let docs_id = $(this).attr('id');
             //alert(docs_id);
@@ -219,12 +214,46 @@
                 const docToDelete = querySnapshot.docs[0];
                 //alert(docToDelete.id);
                 await deleteDoc(doc(db, "movies", docs_id));
-                console.log("First document deleted:", docs_id);
+                // console.log("First document deleted:", docs_id);
             } else {
-                console.log("No documents found in collection:", collectionPath);
+                // console.log("No documents found in collection:", collectionPath);
             }
             window.location.reload();
         });
+
+        $('#asdf').click(async function () {
+            // await addDoc(collection(db, "comment"), doc);
+            // let doc0 = {
+            //     'board0': [
+            //         ['Administrator', '잘되는지 테스트', '202404100148'],
+            //         ['Administrator', '잘되는지 테스트', '202404100148'],
+            //         ['Administrator', '잘되는지 테스트', '202404100148']
+            //     ],
+            //     'board1': [
+            //         ['Administrator', '잘되는지 테스트', '202404100148'],
+            //         ['Administrator', '잘되는지 테스트', '202404100148'],
+            //         ['Administrator', '잘되는지 테스트', '202404100148']
+            //     ]
+            // };
+            let doc0 = {
+                    0: {0:"Administrator", 1:'잘되는지 테스트', 2:'202404100148'},
+                    1: {0:"Administrator", 1:'테스트 해봅니다~', 2:'202404100148'},
+                    2: {0:"Administrator", 1:'날짜도 테스트', 2:'202404100148'}
+            };
+            const comref = doc(collection(db,'comment','board4','hell'));  // db, 컬렉션명, 문서명, 하위컬렉션명
+            await setDoc(comref, doc0);
+        });
+
+
+
+
+
+
+
+
+
+
+
 
         $("#postingbtn").click(async function () {
             let image = $('#image').val();
