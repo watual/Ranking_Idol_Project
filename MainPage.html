@@ -78,28 +78,23 @@
                 <div class="titleText titleText_rec">최신 추천곡</div>
                 <div class="recommendSong">
                     <div class="recommendSong_item">
-                        <img class="albumThumnail" src="src/album/MashUp.webp"
-                            onclick="location.href='https:\/\/www.youtube.com/watch?v=SXE-gIU3yJs&list=RDGMEM0s70dY0AfCwh3LqQ-Bv1xg&start_radio=1&rv=QgMFpuos4Rg';">
+                        <img class="albumThumnail" src="src/album/MashUp.webp" id="mashup">
                         <div>MashUp _ 아이네</div>
                     </div>
                     <div class="recommendSong_item">
-                        <img class="albumThumnail" src="src/album/ReWind.jpg"
-                            onclick="location.href='https:\/\/www.youtube.com/watch?v=fgSXAKsq-Vo';">
+                        <img class="albumThumnail" src="src/album/ReWind.jpg" id="rewind">
                         <div>RE:WIND _ 이세계아이돌</div>
                     </div>
                     <div class="recommendSong_item">
-                        <img class="albumThumnail" src="src/album/겨울봄.jpg"
-                            onclick="location.href='https:\/\/.youtube.com/watch?v=JY-gJkMuJ94';">
+                        <img class="albumThumnail" src="src/album/겨울봄.jpg" id="rudnfqha">
                         <div>겨울봄 _ 이세계아이돌</div>
                     </div>
                     <div class="recommendSong_item">
-                        <img class="albumThumnail" src="src/album/LockDown.jpg"
-                            onclick="location.href='https:\/\/www.youtube.com/watch?v=QgMFpuos4Rg';">
+                        <img class="albumThumnail" src="src/album/LockDown.jpg" id="lockdown">
                         <div>LockDown _ 이세계아이돌</div>
                     </div>
                     <div class="recommendSong_item">
-                        <img class="albumThumnail" src="src/album/Kidding.jpg"
-                            onclick="location.href='https:\/\/www.youtube.com/watch?v=rDFUl2mHIW4';">
+                        <img class="albumThumnail" src="src/album/Kidding.jpg" id="kidding">
                         <div>Kidding _ 이세계아이돌</div>
                     </div>
                 </div>
@@ -154,6 +149,21 @@
         //문서 로드, 함수 호출
         document.addEventListener("DOMContentLoaded", ready);
         function ready() {
+            $('#mashup').click(function() {
+                location.href='https://www.youtube.com/watch?v=SXE-gIU3yJs';
+            })
+            $('#rewind').click(function() {
+                location.href='https://www.youtube.com/watch?v=fgSXAKsq-Vo';
+            })
+            $('#rudnfqha').click(function() {
+                location.href='https://www.youtube.com/watch?v=JY-gJkMuJ94';
+            })
+            $('#lockdown').click(function() {
+                location.href='https://www.youtube.com/watch?v=QgMFpuos4Rg';
+            })
+            $('#kidding').click(function() {
+                location.href='https://www.youtube.com/watch?v=rDFUl2mHIW4';
+            })
             //창 그라데이션 호출
             if (sessionStorage.getItem('first') == 'first') {
                 $('.full_size').css("transition", "opacity 2s ease-in-out 1s");
