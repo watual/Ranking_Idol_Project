@@ -1,0 +1,17 @@
+{
+    "name": "jomijin",
+    "version": "1.0.0",
+    "description": "",
+    "main": "index.js",
+    "scripts": {
+        "start": "node index"
+    },
+    "author": "",
+    "license": "ISC",
+    "dependencies": {
+        "express": "^4.19.2",
+        "express-mysql-session": "^3.0.0",
+        "express-session": "^1.18.0",
+        "mysql": "^2.18.1"
+    }
+}

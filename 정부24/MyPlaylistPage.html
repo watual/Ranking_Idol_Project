@@ -1,0 +1,296 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>musicList</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous" />
+    <link rel="stylesheet" href="wonha.css" />
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+</head>
+
+<body>
+    <div class="full_size"> <!--1번-->
+        <div class="logo">
+            <a href="MainPage.html">
+                <img src="src/logo.png" alt="Music" />
+            </a>
+        </div>
+        <div class="nav_top_profile">
+            <div class="nav_top_profile_iden">
+                <img class="icon" src="src/icon/user.png">
+            </div>
+            <div class="nav_top_profile_setting">
+                <img class="icon" src="src/icon/set.png">
+            </div>
+        </div>
+        <div class="nav_top" id="div1"> <!--상단 nav bar-->
+            <div class="nav_top_item">
+                <input class="nav_top_text" value="♬~노래 검색">
+                <input type="text" name="searchText" class="nav_top_search" required="required">
+                <input type="button" class="nav_top_search_submit" value="▷">
+            </div>
+        </div>
+        <div class="mainDiv">
+            <div class="nav_left"> <!--좌측 nav bar-->
+                <div class="nav_left_top">
+                    <ul>
+                        <li onclick="location.href='MainPage.html';">
+                            <img class="icon" src="src/icon/home.png" />
+                            <a>
+                                홈
+                            </a>
+                        </li>
+                        <li>
+                            <img class="icon" src="src/icon/search.png" />
+                            <a href="">
+                                둘러보기
+                            </a>
+                        </li>
+                        <li>
+                            <img class="icon" src="src/icon/myPlayList.png" />
+                            <a href="">
+                                My PlayList
+                            </a>
+                        </li>
+                        <div style="height: 70px;">
+
+                        </div>
+                    </ul>
+                </div>
+                <div class="nav_left_top">
+                    <ul>
+                        <!-- 테스트 -->
+                        <li>
+                            playList1
+                        </li>
+                        <li>
+                            playList2
+                        </li>
+                        <li>
+                            playList3
+                        </li>
+                        <li>
+                            playList4
+                        </li>
+                        <li>
+                            playList5
+                        </li>
+                        <li>
+                            playList6
+                        </li>
+                        <li>
+                            playList7
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            <div class="mainContent1">
+                <!-- 추천노래 -->
+                <div class="titleText titleText_rec">최신 추천곡</div>
+                <div class="recommendSong">
+                    <div class="recommendSong_item">
+                        <img class="albumThumnail" src="src/album/MashUp.webp"
+                            onclick="location.href='https:www.youtube.com/watch?v=SXE-gIU3yJs&list=RDGMEM0s70dY0AfCwh3LqQ-Bv1xg&start_radio=1&rv=QgMFpuos4Rg';">
+                        <div>MashUp _ 아이네</div>
+                    </div>
+                    <div class="recommendSong_item">
+                        <img class="albumThumnail" src="src/album/ReWind.jpg"
+                            onclick="location.href='https:www.youtube.com/watch?v=fgSXAKsq-Vo';">
+                        <div>RE:WIND _ 이세계아이돌</div>
+                    </div>
+                    <div class="recommendSong_item">
+                        <img class="albumThumnail" src="src/album/겨울봄.jpg"
+                            onclick="location.href='https:www.youtube.com/watch?v=JY-gJkMuJ94';">
+                        <div>겨울봄 _ 이세계아이돌</div>
+                    </div>
+                    <div class="recommendSong_item">
+                        <img class="albumThumnail" src="src/album/LockDown.jpg"
+                            onclick="location.href='https:www.youtube.com/watch?v=QgMFpuos4Rg';">
+                        <div>LockDown _ 이세계아이돌</div>
+                    </div>
+                    <div class="recommendSong_item">
+                        <img class="albumThumnail" src="src/album/Kidding.jpg"
+                            onclick="location.href='https:www.youtube.com/watch?v=rDFUl2mHIW4';">
+                        <div>Kidding _ 이세계아이돌</div>
+                    </div>
+                </div>
+
+                <div class="mainContent2">
+                    <!-- 가수순위 -->
+                    <div class="idolRank">
+                        <div class="titleText">Artist Rank</div>
+                        <div class="idolRank_item" onclick="location.href='https:www.youtube.com/watch?v=fgSXAKsq-Vo';">
+                            <img class="albumThumnail" src="src/album/ReWind.jpg">
+                            <div class="idolRank_item_text">
+                                <div>이세계 아이돌</div>
+                                <div>조회수 : 100,000,000</div>
+                            </div>
+                        </div>
+                        <div class="idolRank_item" onclick="location.href='https:www.youtube.com/watch?v=JY-gJkMuJ94';">
+                            <img class="albumThumnail" src="src/album/겨울봄.jpg">
+                            <div class="idolRank_item_text">
+                                <div>이세계 아이돌</div>
+                                <div>조회수 : 100,000,000</div>
+                            </div>
+                        </div>
+                        <div class="idolRank_item" onclick="location.href='https:www.youtube.com/watch?v=QgMFpuos4Rg';">
+                            <img class="albumThumnail" src="src/album/LockDown.jpg">
+                            <div class="idolRank_item_text">
+                                <div>이세계 아이돌</div>
+                                <div>조회수 : 100,000,000</div>
+                            </div>
+                        </div>
+                        <div class="idolRank_item" onclick="location.href='https:www.youtube.com/watch?v=rDFUl2mHIW4';">
+                            <img class="albumThumnail" src="src/album/Kidding.jpg">
+                            <div class="idolRank_item_text">
+                                <div>이세계 아이돌</div>
+                                <div>조회수 : 100,000,000</div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- 노래순위 -->
+                    <div class="musicRank">
+                        <div class="titleText">Music Rank</div>
+                        <div class="musicRank_item"
+                            onclick="location.href='https:www.youtube.com/watch?v=SXE-gIU3yJs&list=RDGMEM0s70dY0AfCwh3LqQ-Bv1xg&start_radio=1&rv=QgMFpuos4Rg';">
+                            <img class="music_icon" src="src/album/MashUp.webp">
+                            <div class="musicRank_item_text">
+                                <div>이세계 아이돌</div>
+                                <div>MashUp</div>
+                            </div>
+                        </div>
+                        <div class="musicRank_item"
+                            onclick="location.href='https:www.youtube.com/watch?v=fgSXAKsq-Vo';">
+                            <img class="music_icon" src="src/album/ReWind.jpg">
+                            <div class="musicRank_item_text">
+                                <div>이세계 아이돌</div>
+                                <div>ReWind</div>
+                            </div>
+                        </div>
+                        <div class="musicRank_item"
+                            onclick="location.href='https:www.youtube.com/watch?v=JY-gJkMuJ94';">
+                            <img class="music_icon" src="src/album/겨울봄.jpg">
+                            <div class="musicRank_item_text">
+                                <div>이세계 아이돌</div>
+                                <div>겨울봄</div>
+                            </div>
+                        </div>
+                        <div class="musicRank_item"
+                            onclick="location.href='https:www.youtube.com/watch?v=QgMFpuos4Rg';">
+                            <img class="music_icon" src="src/album/LockDown.jpg">
+                            <div class="musicRank_item_text">
+                                <div>이세계 아이돌</div>
+                                <div>LockDown</div>
+                            </div>
+                        </div>
+                        <div class="musicRank_item"
+                            onclick="location.href='https:www.youtube.com/watch?v=rDFUl2mHIW4';">
+                            <img class="music_icon" src="src/album/Kidding.jpg">
+                            <div class="musicRank_item_text">
+                                <div>이세계 아이돌</div>
+                                <div>Kidding</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div></div>
+        </div>
+    </div>
+    <script type="module" defer>
+        document.addEventListener("DOMContentLoaded", ready);
+        function ready() {
+            //아이돌 랭크 데이터
+            let getTopArtists = "https://ws.audioscrobbler.com/2.0/?method=chart.gettopartists&api_key=54f23d667cf616502635a2d6dc54b1bb&format=json";
+            fetch(getTopArtists)
+                .then((response) => response.json())
+                .then(async (data) => {
+                    const dataResponse = data.artists.artist;
+
+                    dataResponse.forEach(item => {
+                        const dataRes_name = item.name;
+                        //const dataRes_image = item.image[0]['#text'];
+                        const playCount = item.playcount;
+                        const url = item.url;
+
+
+                        $('.idolRank').append(`
+                        <div class="idolRank_item" onclick="location.href='${url}';">
+                            <img class="albumThumnail" src="src/album/ReWind.jpg">
+                            <div class="idolRank_item_text">
+                                <div onclick="location.href='${url}';">${dataRes_name}</div>
+                                <div>조회수 : ${playCount}</div>
+                            </div>
+                        </div>
+                        `);
+                    })
+                })
+                .catch((error) => {
+                    console.error('에러코드 : ', error);
+                });
+
+            //노래 랭크 데이터
+            let getTopTracks = "https://ws.audioscrobbler.com/2.0/?method=chart.gettoptracks&api_key=54f23d667cf616502635a2d6dc54b1bb&format=json";
+            fetch(getTopTracks)
+                .then((response) => response.json())
+                .then(async (data) => {
+                    const dataResponse = data.tracks.track;
+                    dataResponse.forEach(item => {
+                        //console.log(item);
+                        const artist = item.artist.name;
+                        const name = item.name;
+                        const playCount = item.playcount;
+                        const url = item.url;
+
+
+                        $('.musicRank').append(`
+                        <div class="musicRank_item">
+                            <img class="music_icon" src="src/album/ReWind.jpg" onclick="location.href='${url}';">
+                            <div class="musicRank_item_text">
+                                <div>${artist}</div>
+                                <div onclick="location.href='${url}';">${name}</div>
+                            </div>
+                        </div>
+                        `);
+                    })
+                })
+                .catch((error) => {
+                    console.error('에러코드 : ', error);
+                });
+                
+        //function Ready()
+        }
+        //데이터 수신
+        //데이터 전송
+        function sendData() {
+            const sendData = document.getElementsByName("searchText")[0].value;
+            sessionStorage.setItem('item1', sendData);
+            location.href = 'SearchPage.html';
+        }
+
+        $(function () {
+            $('.nav_top_search').on('input', function (f) {
+                if ($('.nav_top_search').val() != '') {
+                    $('.nav_top_search_submit').click(function () {
+                        sendData();
+                    });
+                    $('.nav_top_text').attr("value", "");
+                    addEventListener('keydown', function (e) {
+                        if ((e.code == 'Enter') || (e.code == 'NumpadEnter') && $('.nav_top_search').val() != '') {
+                            sendData();
+                        }
+                    })
+                } else {
+                    $('.nav_top_text').attr("value", "♬~노래 검색");
+                }
+
+            })
+
+        })
+    </script>
+</body>
+
+</html>

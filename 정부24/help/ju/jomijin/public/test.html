@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>게시글 작성하기</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script type="module">
+        $(document).ready(function() {
+            $("#btnSongAdd").click(function () {
+                const searchBar = document.getElementById('searchBar');
+                searchBar.style.display = searchBar.style.display === 'block' ? 'none' : 'block';
+            });
+            let selectedSong = {};
+            $("#search").click(function () {
+                let searchInput = document.getElementById("searchInput").value;
+                let url = "https://ws.audioscrobbler.com/2.0/?method=track.search&track=" + searchInput + "&api_key=a438d29708eafc8ba9818d57a6696d6b&format=json";
+                fetch(url)
+                    .then((response) => response.json())
+                    .then((data) => {
+                        console.log(data);
+                        const searchList = data.results.trackmatches.track;
+                        const resultList = $('#searchResult');
+                        resultList.empty();
+                        searchList.forEach((item) => {
+                            const url = item.url;
+                            const artist = item.artist;
+                            const name = item.name;
+                            const parentDiv = $(`
+                                <div>
+                                    <label>${name}</label>
+                                    <label>${artist}</label>
+                                </div>
+                            `).appendTo(resultList);
+                            parentDiv.on('click', function () {
+                                selectedSong = {
+                                    name: name,
+                                    artist: artist
+                                };
+                                alert(name + '노래가 추가되었습니다');
+                            });
+                        });
+                    })
+                    .catch((error) => {
+                        console.error('에러코드 : ', error);
+                    });
+            });
+            
+            $("#submit").click(async function () {
+                let title = $('#exampleFormControlInput1').val();
+                let content = $('#exampleFormControlTextarea1').val();
+                let name = selectedSong.name;
+                let artist = selectedSong.artist;
+                let id = '';
+                // Firebase에서 MySQL로 변경
+                let formData = {
+                    'id': id,
+                    'title': title,
+                    'content': content,
+                    'name': name,
+                    'artist': artist
+                };
+                $.ajax({
+                    type: "POST",
+                    url: "/save",
+                    data: JSON.stringify(formData),
+                    contentType: "application/json",
+                    success: function (response) {
+                        console.log(response);
+                        // 페이지 새로고침
+                        window.location.reload();
+                    },
+                    error: function (xhr, status, error) {
+                        console.error('에러 발생:', error);
+                    }
+                });
+                
+                console.log(formData);
+            });
+        });
+    </script>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous" />
+</head>
+<style>
+    .mb-3 {
+        margin: 100px 100px auto 100px;
+    }
+    .mb-3>textarea {
+        height: 400px;
+    }
+    #btnSongAdd {
+        margin: 10px auto 0px auto;
+    }
+    #submit {
+        margin-left: 100px;
+    }
+    .searchBar {
+        width: 40%;
+        margin: 30px auto 0px auto;
+    }
+    .searchKeyword {
+        width: 500px;
+    }
+    #searchResult {
+        width: 50%;
+        margin: 50px auto 0px auto;
+    }
+</style>
+<body>
+    <div class="d-grid gap-2 col-6 mx-auto">
+        <button id="btnSongAdd" class="btn btn-primary" type="button">노래 추가하기</button>
+    </div>
+    <div id="searchBar" class="searchBar" style="display: none">
+        <input id="searchInput" type="text" class="searchKeyword" placeholder="검색어 입력" />
+        <button id="search" type="submit" class="btnSearchSubmit">검색</button>
+    </div>
+    <div id="searchResult">
+    </div>
+    <div class="mb-3">
+        <label for="exampleFormControlInput1" class="form-label">제목</label>
+        <input type="email" class="form-control" id="exampleFormControlInput1" placeholder="제목을 입력하세요" />
+        <label for="exampleFormControlTextarea1" class="form-label"></label>
+        <textarea class="form-control" id="exampleFormControlTextarea1" rows="3" placeholder="내용을 작성해주세요"></textarea>
+    </div>
+    <button id="submit" class="btn btn-primary" type="button">작성</button>
+</body>
+</html>

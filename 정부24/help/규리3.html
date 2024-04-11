@@ -1,0 +1,362 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>파티모집 게시판</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/10.4.0/firebase-auth.js"></script>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Black+Han+Sans&family=Hi+Melody&family=Nanum+Pen+Script&display=swap');
+
+        @import url('https://fonts.googleapis.com/css2?family=Nanum+Gothic&display=swap');
+        @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500&display=swap');
+
+        @font-face {
+            font-family: 'iceJaram-Rg';
+            src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2307-2@1.0/iceJaram-Rg.woff2') format('woff2');
+            font-weight: normal;
+            font-style: normal;
+        }
+
+        @font-face {
+            font-family: 'Pretendard-Regular';
+            src: url('https://cdn.jsdelivr.net/gh/Project-Noonnu/noonfonts_2107@1.1/Pretendard-Regular.woff') format('woff');
+            font-weight: 700;
+            font-style: normal;
+        }
+
+        @font-face {
+            font-family: 'KCCChassam';
+            src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2302@1.0/KCCChassam.woff2') format('woff2');
+            font-weight: normal;
+            font-style: normal;
+        }
+
+        @font-face {
+            font-family: 'SBAggroB';
+            src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2108@1.1/SBAggroB.woff') format('woff');
+            font-weight: normal;
+            font-style: normal;
+        }
+
+        * {
+            font-family: "Nanum Pen Script", cursive;
+        }
+
+        #logo {
+            font-weight: bold;
+            color: #e2821c;
+            text-decoration: none;
+            font-size: 30px;
+        }
+
+        .border-box {
+            border: 1px solid black;
+            width: 1250px;
+            border-radius: 10px;
+            text-align: center;
+            margin: 50px auto 20px auto;
+        }
+
+        body {
+            background-color: #FBFBFA;
+        }
+
+        .container {
+            width: 300px;
+            margin: 30px auto auto 30px;
+            text-align: center;
+        }
+
+        .cards {
+            width: 1200px;
+            margin: 20px auto 20px 20px;
+            align-items: center;
+        }
+
+        .writebtn {
+            width: 1200px;
+            display: flex;
+            flex-direction: row;
+            align-items: center;
+            justify-content: right;
+        }
+
+        .pgmv {
+            display: flex;
+            flex-direction: row;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .pgmv>button {
+            margin-right: 5px;
+        }
+
+        .pagination {
+            display: flex;
+            justify-content: center;
+            list-style: none;
+            padding: 0;
+        }
+
+        .pagination li {
+            margin: 0 5px;
+        }
+
+        .pagination li a {
+            display: block;
+            padding: 5px 10px;
+            color: #000;
+            background-color: #e9ecef;
+            border-radius: 5px;
+        }
+
+        .pagination li a.active,
+        .pagination li a:hover {
+            background-color: #007bff;
+            color: #fff;
+        }
+    </style>
+    <script type="module">
+        import { initializeApp } from 'https://www.gstatic.com/firebasejs/10.4.0/firebase-app.js';
+        import { getAnalytics } from 'https://www.gstatic.com/firebasejs/10.4.0/firebase-analytics.js';
+        import { getAuth, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/10.4.0/firebase-auth.js";
+        import { getDatabase, ref, child, get, set, query, orderByKey, limitToLast } from "https://www.gstatic.com/firebasejs/10.4.0/firebase-database.js";
+
+        // Firebase 구성
+        const firebaseConfig = {
+            apiKey: "AIzaSyBy-5HWDgxJ6hZ5h30Is7xCAZm3W7HmR78",
+            authDomain: "yanado-a4df1.firebaseapp.com",
+            databaseURL: "https://yanado-a4df1-default-rtdb.firebaseio.com",
+            projectId: "yanado-a4df1",
+            storageBucket: "yanado-a4df1.appspot.com",
+            messagingSenderId: "1082911983171",
+            appId: "1:1082911983171:web:f8843a3015379b859236f6",
+            measurementId: "G-YKDTZ5B6Z7"
+        };
+
+        // Firebase 초기화
+        const app = initializeApp(firebaseConfig);
+        const analytics = getAnalytics(app);
+        const db = getDatabase();
+
+        document.addEventListener('DOMContentLoaded', function () {
+            loadParties(1);
+        });
+
+        // 페이지 로드 시 첫 페이지의 글 목록을 불러옵니다.
+        document.addEventListener('DOMContentLoaded', function () {
+            loadParties(1);
+        });
+
+        async function loadParties(page, limit = 9) {
+            const dbRef = ref(getDatabase());
+            const totalPostsSnapshot = await get(child(dbRef, 'party_letter'));
+            let totalPosts = 0;
+            const parties = [];
+
+            if (totalPostsSnapshot.exists()) {
+                totalPostsSnapshot.forEach((childSnapshot) => {
+                    // 데이터를 parties 배열에 추가
+                    parties.unshift(childSnapshot.val()); // 역순으로 배열에 추가하여 최신 글이 먼저 오도록 함
+                });
+                totalPosts = parties.length; // 전체 게시글 수 계산
+            }
+
+            // 전체 페이지 수 계산
+            const totalPages = Math.ceil(totalPosts / limit);
+
+            // 현재 페이지에 표시할 글을 계산
+            const startIndex = (page - 1) * limit;
+            const endIndex = startIndex + limit;
+            const partiesToShow = parties.slice(startIndex, endIndex);
+
+            // 화면에 글 목록을 표시
+            $('#card').empty(); // 기존 목록을 비우고
+            partiesToShow.forEach(party => {
+                $('#card').append(`
+            <div class="col">
+                <div class="card h-100">
+                    <h5 class="card-title">${party.title}</h5>
+                    <img src="${party.image}" class="card-img-top" alt="...">
+                </div>
+            </div>
+        `);
+            });
+
+            // 페이지네이션 버튼 설정
+            setupPagination(totalPages, page);
+        }
+
+
+        function setupPagination(totalPages, currentPage) {
+            const paginationContainer = document.querySelector('.pgmv');
+            paginationContainer.innerHTML = ''; // 기존 페이지네이션을 비웁니다.
+            for (let i = 1; i <= totalPages; i++) {
+                const button = document.createElement('button');
+                button.innerText = i;
+                button.className = `btn btn-primary ${i === currentPage ? 'active' : ''}`;
+                button.addEventListener('click', function () {
+                    loadParties(i);
+                });
+                paginationContainer.appendChild(button);
+            }
+        }
+
+        $(document).ready(function () {
+            loadParties(1);
+        });
+
+        $("#logo").click(async function () {
+            window.location.href = "main.html";
+        });
+
+        $("#writebtn").click(async function () {
+            window.location.href = "partywrite.html";
+        });
+
+        $("#title").click(async function () {
+            window.location.href = "";
+        });
+
+        $("#image").click(async function () {
+            window.location.href = "";
+        });
+
+        function loadAllPartys() {
+            const partyRef = ref(db, 'party_letter');
+
+            get(partyRef).then((snapshot) => {
+                const party = snapshot.val();
+                for (const partyId in party) {
+                    if (Object.hasOwnProperty.call(party, partyId)) {
+                        const partyData = party[partyId];
+                        const title = partyData.title;
+                        const image = partyData.image;
+
+                        let temp_html_title = `${title}`;
+                        let temp_html_image = `<img src="${image}" class="card-img-top" alt="...">`;
+                        $('#title').empty().append(temp_html_title);
+                        $('#image').empty().append(temp_html_image);
+
+                        let temp_html = `            
+                        <div class="col">
+                            <div class="card h-100">
+                                <h5 class="card-title">${title}</h5>
+                                <img src="${image}" class="card-img-top" alt="...">
+                            </div>
+                        </div>`;
+                        $('#card').append(temp_html);
+                    }
+                }
+            }).catch((error) => {
+                console.error('데이터를 가져오는 중 오류 발생:', error);
+            });
+        }
+        loadAllPartys();
+
+        $("#page1").click(async function () {
+            window.location.reload();
+        });
+
+        $("#page2").click(async function () {
+            window.location.href = "page2.html";
+        });
+
+        const auth = getAuth();
+
+        onAuthStateChanged(auth, (user) => {
+            if (user) {
+                // 사용자가 로그인한 상태
+                document.getElementById('header-before-login').style.display = 'none';
+                document.getElementById('header-after-login').style.display = 'block';
+            } else {
+                // 사용자가 로그아웃한 상태
+                document.getElementById('header-before-login').style.display = 'block';
+                document.getElementById('header-after-login').style.display = 'none';
+            }
+        });
+
+    </script>
+</head>
+
+<body>
+    <div id="header-before-login" style="display: none;">
+        <!--로그인 전 헤더-->
+        <header class="p-3 text-bg-dark">
+            <div class="container">
+                <div class="d-flex flex-wrap align-items-center justify-content-center justify-content-lg-start">
+                    <a href="main.html" class="d-flex align-items-center mb-2 mb-lg-0 text-white text-decoration-none">
+                        <img src="https://github.com/yuguri76/phoenix/blob/gyul/images/%EC%95%BC%EB%82%98%EB%91%90%EB%A1%9C%EA%B3%A0%EC%B5%9C%EC%A2%85%EB%B3%B82.png?raw=true"
+                            alt="야나두 로고" style="height: 230px;">
+                    </a>
+
+                    <ul class="nav col-12 col-lg-auto me-lg-auto mb-2 justify-content-center mb-md-0">
+                        <li><a href="plan.html" class="nav-link px-2" style="color: #020715;">계획전시</a></li>
+                        <li><a href="party.html" class="nav-link px-2" style="color: #020715;">파티모집</a></li>
+                    </ul>
+
+                    <div class="text-end">
+                        <link rel="stylesheet" href="path/to/your/stylesheet.css">
+                        <button type="button" class="btn" onclick="location.href='Login.html'"
+                            style="color: white; background-color: #fc7600; font-family: 'iceJaram-Rg', sans-serif; font-size: 25px; font-weight: bold; border-radius: 10px; opacity: 0.9; padding: 10px 15px; text-align: center;">로그인</button>
+                    </div>
+                </div>
+            </div>
+        </header>
+    </div>
+    <div id="header-after-login" style="display: none;">
+        <!--로그인 후 헤더-->
+        <header class="p-3 text-bg-dark">
+            <div class="container">
+                <div class="d-flex flex-wrap align-items-center justify-content-between">
+                    <a href="main.html" class="d-flex align-items-center mb-2 mb-lg-0 text-white text-decoration-none">
+                        <img src="https://github.com/yuguri76/phoenix/blob/gyul/images/%EC%95%BC%EB%82%98%EB%91%90%EB%A1%9C%EA%B3%A0%EC%B5%9C%EC%A2%85%EB%B3%B82.png?raw=true"
+                            alt="야나두 로고" style="height: 230px;">
+                    </a>
+                    <div>
+                        <ul class="nav me-auto">
+                            <li><a href="plan.html" class="nav-link px-2" style="color: #020715;">계획전시</a></li>
+                            <li><a href="party.html" class="nav-link px-2" style="color: #020715;">파티모집</a></li>
+                        </ul>
+                        <button type="button" class="btn" onclick="location.href='profile.html'"
+                            style="color: #fc7600; background-color: white; font-family: 'iceJaram-Rg', sans-serif; font-size: 25px; font-weight: bold; opacity: 0.9;border: 2px solid #fc7600; border-radius: 10px;">내
+                            프로필 보기</button>
+                        <button type="button" class="btn" onclick="logout()"
+                            style="color: white; background-color: #fc7600; font-family: 'iceJaram-Rg', sans-serif; font-size: 25px; font-weight: bold; border-radius: 10px; opacity: 0.9;">로그아웃</button>
+                    </div>
+                </div>
+            </div>
+        </header>
+    </div>
+
+    <div class="border-box">
+        <div class="container">
+            <h1>파티모집 게시판</h1>
+        </div>
+        <div class="writebtn">
+            <button id="writebtn" type="button" class="btn btn-warning">글쓰기</button>
+
+        </div>
+        <div class="cards">
+            <div id="card" class="row row-cols-1 row-cols-md-3 g-4">
+                <!-- <div class="col">
+                    <div class="card h-100">
+                        <h5 id="title" class="card-title">글 제목</h5>
+                        <img id="image"
+                            src="data:image/jpeg;base64,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"
+                            class="card-img-top" alt="...">
+                    </div> -->
+            </div>
+        </div>
+    </div>
+    <div class="pgmv"></div>
+</body>
+
+</html>

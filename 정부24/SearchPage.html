@@ -183,10 +183,11 @@
                 .catch((error) => {
                     console.error('에러코드 : ', error);
                 });
-
+            // 플레이어 삭제
             $('.player_off').click(function () {
                 const btn = document.getElementById('player');
-                btn.style.visibility = 'hidden';
+                //btn.style.visibility = 'hidden';
+                btn.remove();
             });
 
             // End of : function ready()
@@ -220,5 +221,4 @@
         })
     </script>
 </body>
-
 </html>
