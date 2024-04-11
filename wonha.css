@@ -43,6 +43,8 @@ a:hover {
     display: flex;
     flex-direction: column;
     color: white;
+    opacity: 0;
+    transition: opacity 0.5s ease 0.5s;
 }
 .logo {
     position: absolute;

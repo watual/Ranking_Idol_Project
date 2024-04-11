@@ -23,7 +23,7 @@
             color: white;
             text-align: center;
             opacity: 0;
-            transition: all 4s;
+            transition: all 2s;
             height: 100vh;
         }
         .Government {
@@ -35,7 +35,7 @@
         }
         .img1 {
             position: absolute;
-            background-image: url("https://github.com/watual/Ranking_Idol_Project/blob/main/src/background/Goverment24.png?raw=true");
+            background-image: url("src/background/Goverment24.png?raw=true");
             z-index: -1;
             background-position: center;
             background-repeat: no-repeat;
@@ -43,8 +43,8 @@
             opacity: 0;
             height: 100%;
             width: 100%;
-            transition-delay: 1500ms;
-            transition-duration: 4s;
+            /* transition-delay: 1500ms; */
+            transition-duration: 2s;
         }
     </style>
     <script>
@@ -58,10 +58,12 @@
                         console.log(ob.target);
                         if (ob.target.className == 'img1') {
                             ob.target.style.opacity = 0.5;
+
+
                             setTimeout(function () {
-                                let changeBG = 'url("https://github.com/watual/Ranking_Idol_Project/blob/main/src/logo.png?raw=true")';
+                                let changeBG = 'url("src/logo.png?raw=true")';
                                 ob.target.style.backgroundImage = changeBG;
-                            }, 4000
+                            }, 1500
                             )
                         } else {
                             ob.target.style.opacity = 1;
