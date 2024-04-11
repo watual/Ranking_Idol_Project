@@ -36,6 +36,7 @@ a:hover {
 
 .albumThumnail {
     height: 200px;
+    margin-left: 10px;
 }
 .full_size {
     width: 100%;
@@ -115,7 +116,7 @@ a:hover {
     margin-left: 400px;
 }
 .nav_top_profile {
-    position: fixed;
+    position: absolute;
     height: 90px;
     padding-top: 28px;
     right: 0;
@@ -276,6 +277,7 @@ a:hover {
     width: 35px;
     height: 35px;
     margin-right: 5px;
+    margin-left: 10px;
 }
 .searchPage {
     max-height: 2000px;

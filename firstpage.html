@@ -64,10 +64,6 @@
         }
 
         .last1 {
-            height: 269px;
-            opacity: 1;
-        }
-        .last2 {
             width: 360px;
             height: 269px;
             opacity: 1;
@@ -113,14 +109,12 @@
             $(window).scroll(function () {
                 var scrT = $(window).scrollTop();
                 console.log(scrT); //스크롤 값 확인용
-                if (scrT >= $(document).height() - $(window).height()) {
+                if (scrT >= $(document).height() - $(window).height()-1) {
                     //스크롤이 끝에 도달했을때 실행될 이벤트
-                    setTimeout(function () {
-                        // 다른 HTML 파일로 이동
-                        sessionStorage.setItem('first', 'first');
-                        history.pushState(null, "");
-                        window.location.href = 'MainPage.html';
-                    }, 5000);
+                    // 다른 HTML 파일로 이동
+                    sessionStorage.setItem('first', 'first');
+                    history.pushState(null, "");
+                    window.location.href = 'MainPage.html';
                 } else {
                     //아닐때 이벤트
                 }
@@ -137,12 +131,16 @@
     <div class="Government">
         <h1>Ranking Idol Project</h1>
     </div>
+
     <div>
         <div class="wrapper"></div>
     </div>
 
-    <div class="last1">
-        <div class="last2"></div>
+    <div style="opacity: 1;">
+        <div class="last1"></div>
+    </div>
+    <div>
+
     </div>
 </body>
 
