@@ -5,16 +5,17 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>musicList</title>
+    <link rel="stylesheet" href="yeojae.css" />
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous" />
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+
 
     <title>musicList</title>
     <style>
         body {
             background: black;
             height: 400vh;
-            font-family: 'nanumsquare';
         }
 
         div {
@@ -28,13 +29,17 @@
             height: 100vh;
         }
 
-        .Government {
-            opacity: 0;
+        /*.rank {
+            align-items: center;
+            display: flex;
+            justify-content: center;
+            text-align: center;
+        }*/
 
-        }
         h1 {
             font-size: 50px;
         }
+
         .img1 {
             position: absolute;
             background-image: url("src/background/Goverment24.png");
@@ -45,9 +50,34 @@
             opacity: 0;
             height: 100%;
             width: 100%;
-            transition-delay: 1500ms;
+            transition-delay: 10ms;
             transition-duration: 4s;
         }
+
+        .wrapper {
+            width: 1158px;
+            height: 357px;
+            opacity: 1;
+            background-image: url("src/background/Fake.png");
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+        }
+
+        .last1 {
+            height: 269px;
+            opacity: 1;
+        }
+        .last2 {
+            width: 360px;
+            height: 269px;
+            opacity: 1;
+            background-image: url("src/background/hahaha.jpg");
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+        }
+
     </style>
     <script>
         document.addEventListener("DOMContentLoaded", ready);
@@ -58,12 +88,12 @@
                     if (ob.isIntersecting) {
                         console.log(ob.target);
                         if (ob.target.className == 'img1') {
-                                ob.target.style.opacity = 0.5;
-                                setTimeout(function() {
-                                    let changeBG = 'url("src/logo.png")';
-                                    ob.target.style.backgroundImage = changeBG;
-                            },4000
-                        )
+                            ob.target.style.opacity = 0.5;
+                            setTimeout(function () {
+                                let changeBG = 'url("src/logo.png")';
+                                ob.target.style.backgroundImage = changeBG;
+                            }, 2000
+                            )
                         } else {
                             ob.target.style.opacity = 1;
                         }
@@ -79,17 +109,16 @@
             observer.observe(div[1])
             observer.observe(div[2])
             observer.observe(div[3])
-
-            $(window).scroll(function() {
+            $(window).scroll(function () {
                 var scrT = $(window).scrollTop();
                 console.log(scrT); //스크롤 값 확인용
-                if (scrT == $(document).height() - $(window).height()) {
+                if (scrT >= $(document).height() - $(window).height()) {
                     //스크롤이 끝에 도달했을때 실행될 이벤트
-                    setTimeout(function(last) {
+                    setTimeout(function () {
                         // 다른 HTML 파일로 이동
                         sessionStorage.setItem('first', 'first');
                         window.location.href = 'MainPage.html';
-                    }, 500);
+                    }, 5000);
                 } else {
                     //아닐때 이벤트
                 }
@@ -103,14 +132,15 @@
     <div class="Government">
         <h1>정부 24 사전캠프 미니미니 프로젝트</h1>
     </div>
-    <div>
+    <div class="Government">
         <h1>Ranking Idol Project</h1>
     </div>
     <div>
-        <h1>1</h1>
+        <div class="wrapper"></div>
     </div>
-    <div >
-        <h1 class = "last">2</h1>
+
+    <div class="last1">
+        <div class="last2"></div>
     </div>
 
 </body>
