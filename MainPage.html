@@ -39,7 +39,7 @@
             <div class="nav_left"> <!--좌측 nav bar-->
                 <div class="nav_left_top">
                     <ul>
-                        <li onclick="location.href='MainPage.html';">
+                        <li onclick="location.href='index.html';">
                             <img class="icon" src="src/icon/home.png" />
                             <a>
                                 홈
@@ -156,13 +156,15 @@
         function ready() {
             //창 그라데이션 호출
             if (sessionStorage.getItem('first') == 'first') {
-                $('.full_size').css("transition", "opacity 2s ease-in-out 0.5s");
+                $('.full_size').css("transition", "opacity 2s ease-in-out 1s");
                 $('.full_size').css("opacity", "1");
                 console.log("From firstpage.html");
+                sessionStorage.setItem('first', '');
             } else {
                 $('.full_size').css("transition", "opacity 0.25s ease-in-out 0.25s");  //linear, ease, ease-in, ease-out, ease-in-out
                 $('.full_size').css("opacity", "1");
                 console.log("From other");
+                sessionStorage.setItem('first', '');
                 // transition : property duration timingfunction duration
                 // transition-property : 원하는 애니메이션 시킬 속성을  입력합니다. (color, background-color, border-radius, position....)
                 // transition-duration : 애니메이션 효과가 몇초동안 실행될지, 시작해서 끝날때까지 시간을 밀리초(ms), 초(s)단위로  설정합니다.
@@ -177,7 +179,6 @@
                 $(".nav_top_profile_iden").html(`<span class="icon">${username}</span>`);
                 $(".nav_top_profile_setting").html(`<img class="icon" id="logout" src="src/icon/logout.png">`);
             }
-
             //로그아웃
             $("#logout").click(function () {
                 sessionStorage.removeItem('username');
