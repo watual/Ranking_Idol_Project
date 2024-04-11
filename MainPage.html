@@ -64,7 +64,9 @@
                 </div>
                 <div class="nav_left_top">
                     <ul id="nav_playlist">
-                        <!-- 재생목록 -->
+                        <li id="deletePlaylist">
+                            Reset PlayList
+                        </li>
                         <li id="newPlaylist">
                             New PlayList
                         </li>
@@ -167,33 +169,51 @@
                 // transition-timingfunction : 애니메이션이 적용되는 속도를 지정합니다.(linear, ease(기본값), ease-in, ease-out. ease-in-out)
                 // transition-duration : 애니메이션 효과가 몇초 지난 후 작동 할지 설정합니다.
             }
+            //----//
 
 
             $('.setIcon').click(function () {
-                alert('asdf');
                 window.history.back();
             });
 
+            //재생목록 생성, 제거
             //로그인 조회
-            var i = 0;
-            let loginData = sessionStorage.getItem('id');
-            // console.log(loginData);
-            if (loginData == null || loginData == "") {
-                for (i = 1; i <= 15; i++) {
-                    $('#nav_playlist').append(`
-                        <li>
+            let loginData = sessionStorage.getItem('username');
+            let i = sessionStorage.getItem('i');
+            if (i == null) {
+                i = 0;
+            }
+            function playList() {
+                $('#nav_playlist').css('transition', 'all 1s ease-in-out 0');
+                // if (loginData == null || loginData == "") {  //로그인 여부에 따라 변경
+                if (true) {
+                    for (let j = 1; j <= i; j++) {
+                        $('#nav_playlist').append(`
+                        <li id='nav_playlist_li${j}'>
+                            playList_new ${j}
+                        </li>`);
+                    }
+
+                    $('#newPlaylist').click(function () {
+                        i++;
+                        $('#nav_playlist').append(`
+                        <li id='nav_playlist_li${i}'>
                             playList_new ${i}
                         </li>`);
+                        sessionStorage.setItem('i', i);
+                    })
                 }
             }
-            $('#newPlayList').click(function () {
-
-                $('#nav_playlist').append(`
-                        <li>
-                            playList_new ${i}
-                        </li>`);
-                i++;
+            playList();
+            $('#deletePlaylist').click(function () {
+                for (let j = 1; j <= i; j++) {
+                    $(`#nav_playlist_li${j}`).remove();
+                }
+                i=0;
+                sessionStorage.setItem('i', i);
             })
+            //----//
+
 
             //아이돌 랭크 데이터
             let getTopArtists = "https://ws.audioscrobbler.com/2.0/?method=chart.gettopartists&api_key=54f23d667cf616502635a2d6dc54b1bb&format=json";
@@ -251,8 +271,6 @@
                 .catch((error) => {
                     console.error('에러코드 : ', error);
                 });
-
-            //재생 목록 호출
 
             //function Ready()
         }
