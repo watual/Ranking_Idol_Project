@@ -1,0 +1,463 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>야나두-너도 할 수 있어!</title>
+
+    <!-- 부트스트랩 CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <!-- JQuery -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Nanum+Gothic&display=swap');
+        @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500&display=swap');
+
+        @font-face {
+            font-family: 'iceJaram-Rg';
+            src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2307-2@1.0/iceJaram-Rg.woff2') format('woff2');
+            font-weight: normal;
+            font-style: normal;
+        }
+
+        @font-face {
+            font-family: 'Pretendard-Regular';
+            src: url('https://cdn.jsdelivr.net/gh/Project-Noonnu/noonfonts_2107@1.1/Pretendard-Regular.woff') format('woff');
+            font-weight: 700;
+            font-style: normal;
+        }
+
+        @font-face {
+            font-family: 'KCCChassam';
+            src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2302@1.0/KCCChassam.woff2') format('woff2');
+            font-weight: normal;
+            font-style: normal;
+        }
+
+        @font-face {
+            font-family: 'SBAggroB';
+            src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2108@1.1/SBAggroB.woff') format('woff');
+            font-weight: normal;
+            font-style: normal;
+        }
+
+        body {
+            font-family: 'SBAggroB', sans-serif;
+            background-color: #FFFDF3;
+            color: #333;
+            font-weight: 700;
+        }
+
+        header {
+            background-color: #fff;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            padding: 20px 0;
+        }
+
+        #logo {
+            font-weight: bold;
+            color: #e2821c;
+            text-decoration: none;
+            font-size: 30px;
+        }
+
+        #subtext {
+            font-size: 14px;
+            font-weight: 300;
+            color: #666;
+        }
+
+        .nav-link {
+            color: #555 !important;
+            transition: color 0.3s ease;
+            font-family: 'iceJaram-Rg', sans-serif;
+            font-size: 30px;
+        }
+
+        .nav-link:hover {
+            color: #e2821c !important;
+        }
+
+        .btn {
+            font-weight: 500;
+        }
+
+        .banner-image {
+            width: 100%;
+            height: 450px;
+            background: url('https://image.zdnet.co.kr/2020/12/29/865ab83c58f41968b5b066453c03388b.png') no-repeat center center;
+            background-size: cover;
+            border: none;
+        }
+
+        .banner-text {
+            background-color: #fbd4aa;
+            color: #333;
+            padding: 50px 10%;
+            text-align: center;
+            font-family: 'KCCChassam', sans-serif;
+        }
+
+        .team-introduction img {
+            border-radius: 50%;
+        }
+
+        .card {
+            max-width: 100%;
+            margin: 10px;
+            transition: transform 0.3s ease;
+        }
+
+        .card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 12px 24px rgba(0, 0, 0, 0.2);
+        }
+
+        .team-introduction .col-2 {
+            flex: 0 0 auto;
+            width: 20%;
+            /* 5개 카드이므로 전체 너비의 20%를 차지하도록 설정 */
+        }
+
+        .team-introduction .card {
+            width: 100%;
+            /* 카드 너비를 컬럼 너비에 맞춤 */
+            margin: 0 auto;
+            /* 카드를 중앙 정렬 */
+        }
+
+        /* 카드 내부 이미지의 크기 조정 및 카드 내용물 스타일링 */
+        .team-introduction .card-img-top {
+            max-width: 100%;
+            /* 이미지가 카드를 넘치지 않도록 설정 */
+            height: auto;
+        }
+
+        .page-introduction {
+            margin-top: 50px;
+            margin-bottom: 50px !important;
+        }
+
+        .card {
+            margin-bottom: 30px;
+            /* 카드 하단 마진 조정으로 카드 간 간격 확대 */
+        }
+
+        .container.mt-4 {
+            margin-bottom: 50px;
+            /* 게시판 섹션의 하단 간격 조정 */
+        }
+
+        .team-introduction {
+            margin-top: 100px;
+        }
+
+        .team-introduction img {
+            border-radius: 0;
+            /* 이미지의 모서리를 네모나게 만듭니다. */
+        }
+
+        .board-title {
+            cursor: pointer;
+            /* 클릭할 수 있는 요소임을 나타내는 마우스 포인터로 변경 */
+            color: #fc7600;
+            /* 주황색으로 변경 */
+            font-weight: bold;
+            /* 글씨 굵기를 더 두껍게 */
+            transition: color 0.3s ease;
+            /* 색상 변경에 애니메이션 효과 추가 */
+        }
+
+        .board-title:hover {
+            color: #CC8400;
+            /* 호버 시 색상을 더 어두운 주황색으로 변경 */
+        }
+
+        .lineCustom1 {
+            z-index: 30;
+            position: absolute;
+            margin-top: -270px;
+            width: 0;
+            height: 1100px;
+            border-width: 4px;
+            border-left-style: solid;
+            border-right-style: solid;
+            border-image: linear-gradient(0deg, #FF1361 20%, #FFF800 50%, #fbd4aa 70%, #fbd4aa 100%);
+
+            border-image-slice: 1;
+            left: 50%;
+            transform: translateX(-50%);
+        }
+    </style>
+</head>
+
+
+<body>
+
+    <body>
+        <div id="header-before-login" style="display: none;">
+            <!--로그인 전 헤더-->
+            <header class="p-3 text-bg-dark">
+                <div class="container">
+                    <div class="d-flex flex-wrap align-items-center justify-content-center justify-content-lg-start">
+                        <a href="main.html"
+                            class="d-flex align-items-center mb-2 mb-lg-0 text-white text-decoration-none">
+                            <img src="https://github.com/yuguri76/phoenix/blob/gyul/images/%EC%95%BC%EB%82%98%EB%91%90%EB%A1%9C%EA%B3%A0%EC%B5%9C%EC%A2%85%EB%B3%B82.png?raw=true"
+                                alt="야나두 로고" style="height: 230px;">
+                        </a>
+
+                        <ul class="nav col-12 col-lg-auto me-lg-auto mb-2 justify-content-center mb-md-0">
+                            <li><a href="plan.html" class="nav-link px-2" style="color: #020715;">계획자랑</a></li>
+                            <li><a href="party.html" class="nav-link px-2" style="color: #020715;">파티모집</a></li>
+                        </ul>
+
+                        <div class="text-end">
+                            <link rel="stylesheet" href="path/to/your/stylesheet.css">
+                            <button type="button" class="btn" onclick="location.href='Login.html'"
+                                style="color: white; background-color: #fc7600; font-family: 'iceJaram-Rg', sans-serif; font-size: 25px; font-weight: bold; border-radius: 10px; opacity: 0.9; padding: 10px 15px; text-align: center;">로그인</button>
+                        </div>
+                    </div>
+                </div>
+            </header>
+        </div>
+
+        <div id="header-after-login" style="display: none;">
+            <!--로그인 후 헤더-->
+            <header class="p-3 text-bg-dark">
+                <div class="container">
+                    <div class="d-flex flex-wrap align-items-center justify-content-center justify-content-lg-start">
+                        <a href="main.html"
+                            class="d-flex align-items-center mb-2 mb-lg-0 text-white text-decoration-none">
+                            <img src="https://github.com/yuguri76/phoenix/blob/gyul/images/%EC%95%BC%EB%82%98%EB%91%90%EB%A1%9C%EA%B3%A0%EC%B5%9C%EC%A2%85%EB%B3%B82.png?raw=true"
+                                alt="야나두 로고" style="height: 230px;">
+                        </a>
+
+                        <ul class="nav col-12 col-lg-auto me-lg-auto mb-2 justify-content-center mb-md-0">
+                            <li><a href="plan.html" class="nav-link px-2" style="color: #020715;">계획자랑</a></li>
+                            <li><a href="party.html" class="nav-link px-2" style="color: #020715;">파티모집</a></li>
+                        </ul>
+
+                        <div class="text-end" style="display: flex; justify-content: end; gap: 20px;">
+                            <button type="button" class="btn" onclick="location.href='profile.html'"
+                                style="color: #fc7600; background-color: white; font-family: 'iceJaram-Rg', sans-serif; font-size: 25px; font-weight: bold; opacity: 0.9;border: 2px solid #fc7600; border-radius: 10px;">내
+                                프로필 보기</button>
+                            <button type="button" class="btn" onclick="logout()"
+                                style="color: white; background-color: #fc7600; font-family: 'iceJaram-Rg', sans-serif; font-size: 25px; font-weight: bold; border-radius: 10px; opacity: 0.9; color:white">로그아웃</button>
+                        </div>
+                    </div>
+                </div>
+            </header>
+        </div>
+
+        <div class="banner-image"></div>
+        <div class="banner-text">
+            <h2>"혼자서 빨리 갈 수는 있지만, 함께라면 더 멀리 갈 수 있다."</h2>
+            <h2>야나두는 '함께'의 가치를 믿고 지지합니다.</h2>
+        </div>
+
+        <section class="page-introduction mb-4">
+            <div class="container text-center">
+                <div class="row justify-content-center">
+                    <div class="col-md-5">
+                        <h3>계획자랑 게시판</h3>
+                        <h4>오늘 당신의 갓생계획을 알려주세요!</h4>
+                    </div>
+                    <div class="col-md-2"></div> <!-- 중간 간격 추가 -->
+                    <div class="col-md-5">
+                        <h3>파티모집 게시판</h3>
+                        <h4>함께 공부하고 일상을 나누며</h4>
+                        <h4>성장할 동료들을 찾아보세요!</h4>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <div class="container mt-4" id="plans-section">
+            <div class="row">
+                <div class="lineCustom1"></div>
+                <!-- 계획전시 게시판 -->
+                <div class="col-md-5">
+                    <h2 class="board-title" onclick="location.href='plan.html'">
+                        계획자랑 게시판
+                        <img src="https://github.com/yuguri76/phoenix/blob/main/images/orangewing.png?raw=true"
+                            style="height: 50px; width: auto; margin-left: 10px; vertical-align: middle;"
+                            alt="Orangewing Icon">
+                    </h2>
+                    <div id="plan-posts" class="row"></div> <!-- 카드를 동적으로 채울 컨테이너 -->
+                </div>
+
+                <div class="col-md-2"></div> <!-- 중간 간격을 위한 공간 -->
+
+                <!-- 파티모집 게시판 -->
+                <div class="col-md-5">
+                    <h2 class="board-title" onclick="location.href='party.html'">
+                        파티모집 게시판
+                        <img src="https://github.com/yuguri76/phoenix/blob/main/images/orangewing.png?raw=true"
+                            style="height: 50px; width: auto; margin-left: 10px; vertical-align: middle;"
+                            alt="Orangewing Icon">
+                    </h2>
+                    <div id="party-posts" class="row"></div> <!-- 카드를 동적으로 채울 컨테이너 -->
+                </div>
+            </div>
+        </div>
+
+        <script type="module">
+            import { initializeApp } from 'https://www.gstatic.com/firebasejs/10.4.0/firebase-app.js';
+            import { getAnalytics } from 'https://www.gstatic.com/firebasejs/10.4.0/firebase-analytics.js';
+            import { getAuth, onAuthStateChanged } from 'https://www.gstatic.com/firebasejs/10.4.0/firebase-auth.js';
+            import { getDatabase, ref, child, get, set, query, orderByKey, limitToLast } from 'https://www.gstatic.com/firebasejs/10.4.0/firebase-database.js';
+
+
+            // Firebase 구성
+            const firebaseConfig = {
+                apiKey: "AIzaSyBy-5HWDgxJ6hZ5h30Is7xCAZm3W7HmR78",
+                authDomain: "yanado-a4df1.firebaseapp.com",
+                databaseURL: "https://yanado-a4df1-default-rtdb.firebaseio.com",
+                projectId: "yanado-a4df1",
+                storageBucket: "yanado-a4df1.appspot.com",
+                messagingSenderId: "1082911983171",
+                appId: "1:1082911983171:web:f8843a3015379b859236f6",
+                measurementId: "G-YKDTZ5B6Z7"
+            };
+
+            // Firebase 초기화
+            const app = initializeApp(firebaseConfig);
+            const analytics = getAnalytics(app);
+            const db = getDatabase();
+
+            async function loadCards(boardName, containerId, detailPage) {
+                const container = document.getElementById(containerId);
+                const dbRef = ref(db, boardName);
+                const snapshot = await get(query(dbRef, orderByKey(), limitToLast(6)));
+
+                const cards = [];
+                snapshot.forEach(childSnapshot => {
+                    cards.push(childSnapshot);
+                });
+
+                // 배열을 뒤집어 최신 순으로 정렬
+                cards.reverse();
+
+                cards.forEach(childSnapshot => {
+                    const cardData = childSnapshot.val();
+                    const cardHTML = `
+                        <div class="col-4">
+                            <div class="card" onclick="location.href='${detailPage}?post=${childSnapshot.key}'" style="cursor: pointer;">
+                                <img src="${cardData.image || 'path/to/default-image.jpg'}" class="card-img-top" alt="Post Image">
+                                    <div class="card-body">
+                                        <h5 class="card-title">${cardData.title}</h5>
+                                            <p class="card-text">${cardData.content}</p>
+                                    </div>
+                            </div>
+                        </div>`;
+                    container.innerHTML += cardHTML;
+                });
+            }
+
+            document.addEventListener('DOMContentLoaded', () => {
+                loadCards('plans_letter', 'plan-posts', 'plan_writeview.html');
+                loadCards('party_letter', 'party-posts', 'party_writeview.html');
+            });
+
+        </script>
+
+        <script>
+            document.addEventListener('DOMContentLoaded', function () {
+                checkLoginStatus();
+            });
+
+            function checkLoginStatus() {
+                const loggedInUser = sessionStorage.getItem('loggedInUser');
+                if (loggedInUser) {
+                    document.getElementById("header-after-login").style.display = "block";
+                    document.getElementById("header-before-login").style.display = "none";
+                } else {
+                    document.getElementById("header-before-login").style.display = "block";
+                    document.getElementById("header-after-login").style.display = "none";
+                    restrictAccess();
+                }
+            }
+            
+            function restrictAccess() {
+                const fullPath = window.location.href;
+                const fileName = fullPath.split('/').pop().split('?')[0].toLowerCase();
+                const restrictedPages = ['plan_writeview.html', 'party_writeview.html'];
+
+
+                console.log("Full Path:", fullPath); // 전체 파일 경로 출력
+                console.log("File Name:", fileName); // 추출된 파일 이름 출력
+                console.log("Restricted Pages:", restrictedPages, "~~~~~~~~~~~~~~~~~"); // 제한된 페이지 목록 출력
+
+
+                if (restrictedPages.includes(fileName)) {
+                    alert("로그인 후 이용해주세요.");
+                    window.location.href = 'Login.html';    //.html , 문서가 준비되면, 로그인이 안되있으면, 확인, [로그인 상태가 아닐때 Login.html로 가라
+                }
+            }
+
+            function logout() {
+                sessionStorage.removeItem('loggedInUser');
+                window.location.href = 'main.html';
+            }
+        </script>
+
+        <section class="team-introduction mb-4">
+            <div class="container">
+                <h2 class="text-center mb-4">만든 사람들</h2>
+                <div class="row">
+                    <!-- 팀원 카드 예시, 각 팀원을 위한 div를 .col-2 대신 위의 CSS 스타일을 적용 -->
+                    <div class="col-2">
+                        <div class="card">
+                            <img src="https://postfiles.pstatic.net/MjAyNDA0MDlfMTM2/MDAxNzEyNTkxMDc1MzA5.dPC4pWkMs3UmV6AB5LEP2-ZR-nKL2pJeopxGsfPFaN0g.uB6xLoGEbDlaKqtJEsVT4bBrvD66a_SeH7xB2dMGSGog.JPEG/KakaoTalk_20240409_003736355.jpg?type=w773"
+                                class="card-img-top" alt="Team Member 1">
+                            <div class="card-body">
+                                <h5 class="card-title">유규리</h5>
+                                <p class="card-text">리더, INTP</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-2">
+                        <div class="card">
+                            <img src="profile1.jpg" class="card-img-top" alt="Team Member 1">
+                            <div class="card-body">
+                                <h5 class="card-title">김승수</h5>
+                                <p class="card-text">Some quick example text to build on the card title.</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-2">
+                        <div class="card">
+                            <img src="profile1.jpg" class="card-img-top" alt="Team Member 1">
+                            <div class="card-body">
+                                <h5 class="card-title">최연환</h5>
+                                <p class="card-text">Some quick example text to build on the card title.</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-2">
+                        <div class="card">
+                            <img src="profile1.jpg" class="card-img-top" alt="Team Member 1">
+                            <div class="card-body">
+                                <h5 class="card-title">박민혁</h5>
+                                <p class="card-text">Some quick example text to build on the card title.</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-2">
+                        <div class="card">
+                            <img src="profile1.jpg" class="card-img-top" alt="Team Member 1">
+                            <div class="card-body">
+                                <h5 class="card-title">신성훈</h5>
+                                <p class="card-text">Some quick example text to build on the card title.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </body>
+
+</html>

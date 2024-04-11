@@ -118,6 +118,8 @@
     </div>
     <!-- ------------------------스크립트----------------------------- -->
     <script type="module" defer>
+        $(function () {
+        });
         //firebaseDB 세팅
         // Firebase SDK 라이브러리 가져오기
         import { initializeApp } from "https://www.gstatic.com/firebasejs/9.22.0/firebase-app.js";
@@ -138,7 +140,7 @@
         let docs;
         // Firebase DB, Table 호출
         (async () => {
-            docs = await getDocs(collection(db,"rankingidol"));
+            docs = await getDocs(collection(db, "rankingidol"));
             document.addEventListener("DOMContentLoaded", function () {
                 console.log(docs);
                 //index, emptyIndex, 0{createUser, artist, link, music }, 1, 2, ...
@@ -154,13 +156,21 @@
         //문서 로드, 함수 호출
         document.addEventListener("DOMContentLoaded", ready);
         function ready() {
+            //창 그라데이션 호출
+            if (sessionStorage.getItem('first') == 'first') {
+
+                $('.full_size').css("visibility", "visibility");
+            } else {
+
+                $('.full_size').css("visibility", "visibility");
+            }
+
+
             $('.setIcon').click(function () {
                 alert('asdf');
                 window.history.back();
             });
-            //창 그라데이션 출력
-            document.getElementsByClassName('full_size');
-            
+
             //로그인 조회
             let loginData = sessionStorage.getItem('id');
             // console.log(loginData);

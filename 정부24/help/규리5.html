@@ -1,0 +1,316 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>야나두 회원가입</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <style>
+        @font-face {
+            font-family: 'JalnanGothic';
+            src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_231029@1.1/JalnanGothic.woff') format('woff');
+            font-weight: 10;
+            font-style: normal;
+        }
+        body {
+            margin: 0;
+            font-family: 'JalnanGothic', sans-serif;
+            background-color: #FFFDF3;
+        }
+        #container {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 60%;
+            height: 50%;
+            padding: 200px;
+            border: 1px solid #ccc;
+            border-radius: 20px;
+            box-shadow: 20px 20px 20px rgba(0, 0, 0, 0.1);
+            text-align: center;
+        }
+        #logo {
+            position: fixed;
+            /* 뷰포트에 대해 고정된 위치 */
+            top: 0;
+            /* 뷰포트의 상단 가장자리에 맞춤 */
+            left: 0;
+            /* 뷰포트의 왼쪽 가장자리에 맞춤 */
+            z-index: 1000;
+            /* 다른 내용 위에 있도록 함 */
+        }
+        div[id^="container"]>div {
+            margin-bottom: 30px;
+        }
+        div[id^="container"]>div input {
+            width: 100px;
+        }
+        #complete-button {
+            text-align: center;
+            margin-top: 20px;
+        }
+        .rectangle {
+            width: 46%;
+            background-color: #FBD4AA;
+            border-radius: 40px;
+            margin-bottom: 30px;
+            box-sizing: border-box;
+            padding: 20px;
+            margin: 40px auto;
+            font-family: 'WavvePADO-Regular', sans-serif;
+        }
+        @font-face {
+            font-family: 'WavvePADO-Regular';
+            src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/2404@1.0/WavvePADO-Regular.woff2') format('woff2');
+            font-weight: normal;
+            font-style: normal;
+        }
+        .inner-rectangle {
+            border-radius: 20px;
+            border: 1px solid #E2821C;
+            padding: 20px;
+            margin-top: 20px;
+            width: 400px;
+            margin: 0 auto;
+            text-align: center;
+        }
+        .inner-rectangle div {
+            margin-bottom: 10px;
+            text-align: left;
+            margin-left: 50px;
+        }
+        .inner-rectangle div {
+            margin-bottom: 10px;
+            text-align: left;
+            margin-left: 50px;
+        }
+        .inner-rectangle div label {
+            width: 100px;
+            display: inline-block;
+            text-align: right;
+            margin-right: 10px;
+        }
+        .space_login {
+            width: 300px;
+            margin: 10px auto 10px auto;
+            display: block;
+        }
+        .space_login_item {
+            width: 500px;
+            margin: 10px auto 10px auto;
+            display: flex;
+            flex-direction: row;
+        }
+        .space_login label {
+            width: 110px;
+            display: inline-block;
+            text-align: left;
+            margin-right: 10px;
+        }
+        .Ekreo {
+            margin-left: 20px;
+            font-family: 'WavvePADO-Regular', sans-serif;
+            background-color: #FC7600;
+            color: white;
+            cursor: pointer;
+            transition: background-color 0.3s;
+            border: none;
+            border-radius: 20px;
+            padding: 5px 10px;
+            font-size: 15px;
+        }
+        .soakadldi {
+            margin-top: -10px;
+            color: #E2821C;
+            font-size: 45px;
+            z-index: 1;
+            margin-bottom: 60px;
+        }
+        .complete-button {
+            margin-left: 20px;
+            font-family: 'WavvePADO-Regular', sans-serif;
+            background-color: #FC7600;
+            color: white;
+            cursor: pointer;
+            transition: background-color 0.3s;
+            border: none;
+            padding: 10px 20px;
+            font-size: 15px;
+            /* 폰트 크기 증가로 버튼의 높이 증가 */
+        }
+    </style>
+    <script type="module">
+        import { initializeApp } from 'https://www.gstatic.com/firebasejs/10.4.0/firebase-app.js';
+        import { getAnalytics } from 'https://www.gstatic.com/firebasejs/10.4.0/firebase-analytics.js';
+        import { getDatabase, ref, child, get, set } from "https://www.gstatic.com/firebasejs/10.4.0/firebase-database.js";
+        // Firebase 구성
+        const firebaseConfig = {
+            apiKey: "AIzaSyBy-5HWDgxJ6hZ5h30Is7xCAZm3W7HmR78",
+            authDomain: "yanado-a4df1.firebaseapp.com",
+            databaseURL: "https://yanado-a4df1-default-rtdb.firebaseio.com",
+            projectId: "yanado-a4df1",
+            storageBucket: "yanado-a4df1.appspot.com",
+            messagingSenderId: "1082911983171",
+            appId: "1:1082911983171:web:f8843a3015379b859236f6",
+            measurementId: "G-YKDTZ5B6Z7"
+        };
+        // Firebase 초기화
+        const app = initializeApp(firebaseConfig);
+        const analytics = getAnalytics(app);
+        const db = getDatabase();
+        // 중복 확인 버튼 클릭 이벤트 리스너
+        document.querySelector(".Ekreo").addEventListener("click", async function () {
+            const id = document.getElementById("id").value;
+            // 비어있거나 공백만 있을 때 거르기
+            if (id.trim() === "") {
+                alert("아이디를 입력해주세요.");
+                return;
+            }
+            if (id.includes(" ")) {
+                alert("아이디에는 공백이 포함될 수 없습니다.");
+                return;
+            }
+            // Realtime Database에서 해당 ID를 가진 유저를 조회하여 중복 여부 확인
+            const userRef = ref(db, 'users/' + id);
+            try {
+                const snapshot = await get(child(userRef, id));
+                if (snapshot.exists()) {
+                    // 중복되는 아이디일 경우
+                    alert("중복되는 아이디가 있습니다. 변경해주세요.");
+                } else {
+                    // 중복되지 않는 경우
+                    alert("사용 가능한 아이디입니다.");
+                    // 중복 확인이 완료되었음을 표시
+                    document.getElementById("id").dataset.duplicateChecked = true;
+                }
+            } catch (error) {
+                console.error("문서 존재 확인 오류: ", error);
+                alert("오류가 발생했습니다.");
+            }
+        });
+        // 비밀번호 일치 여부 확인
+        function passwordsMatch() {
+            const password = document.getElementById("password").value;
+            const confirmPassword = document.getElementById("confirm_password").value;
+            if (password !== confirmPassword) {
+                alert("비밀번호와 비밀번호 확인 입력이 일치하지 않습니다.");
+                return false;
+            }
+            return true;
+        }
+        // 비밀번호 일치 여부 확인 및 완료 버튼 클릭 이벤트 리스너
+        document.getElementById("complete-button").addEventListener("click", async function () {
+            // 중복 확인 여부를 확인
+            const isDuplicateChecked = document.getElementById("id").dataset.duplicateChecked;
+            if (!isDuplicateChecked || isDuplicateChecked !== "true") {
+                alert("아이디 중복확인을 해주세요.");
+                return; // 가입 중단
+            }
+            // Declare password and confirmPassword variables
+            const password = document.getElementById("password").value;
+            const confirmPassword = document.getElementById("confirm_password").value;
+            if (password.trim() === "" || confirmPassword.trim() === "") {
+                alert("비밀번호를 입력해주세요.");
+                return; // 가입 중단
+            }
+            // 비밀번호에 공백 포함 여부 확인
+            if (password.includes(" ") || confirmPassword.includes(" ")) {
+                alert("비밀번호에 공백이 포함될 수 없습니다.");
+                return; // 가입 중단
+            }
+            // 비밀번호 일치 여부 확인
+            if (password !== confirmPassword) {
+                alert("비밀번호와 비밀번호 확인 입력이 일치하지 않습니다.");
+                return;
+            }
+            const id = document.getElementById("id").value;
+            const name = document.getElementById("name").value;
+            const age = document.getElementById("age").value;
+            const gender = document.getElementById("gender").value;
+            const region = document.getElementById("region").value;
+            // Realtime Database에서 해당 ID를 가진 유저를 조회하여 중복 여부 확인
+            const userRef = ref(db, 'users/' + id);
+            const snapshot = await get(child(userRef, id));
+            if (snapshot.exists()) {
+                // 중복되는 아이디일 경우
+                alert("이미 존재하는 아이디입니다. 다른 아이디를 선택해주세요.");
+                return; // 가입 중단
+            }
+            // 중복확인 및 중복되지 않은 경우에만 가입 진행
+            try {
+                await set(child(userRef, id), {
+                    id: id,
+                    password: password,
+                    name: name,
+                    age: age,
+                    gender: gender,
+                    region: region,
+                    introduce: "",
+                    profileimage: ""
+                });
+                console.log("문서 성공적으로 작성됨");
+                alert("회원가입이 완료되었습니다.");
+                window.location.href = "Login.html";
+            } catch (error) {
+                console.error("문서 추가 오류: ", error);
+                alert("회원가입 중 오류가 발생했습니다.");
+            }
+        });
+        // 야나두 로고 클릭시 main.html로 이동
+        document.getElementById("logo").addEventListener("click", function () {
+            window.location.href = "main.html";
+        });
+    </script>
+</head>
+<body>
+    <div id="container">
+        <a href="main.html" id="logo" class="d-flex align-items-center mb-2 mb-lg-0 text-white text-decoration-none">
+            <img src="https://github.com/yuguri76/phoenix/blob/gyul/images/%EC%95%BC%EB%82%98%EB%91%90%EB%A1%9C%EA%B3%A0%EC%B5%9C%EC%A2%85%EB%B3%B82.png?raw=true"
+                alt="야나두 로고" style="height: 230px;">
+        </a>
+        <h1 class="soakadldi">회원가입</h1>
+        <div class="space_login">
+            <div class="space_login_item">
+                <label for="id">아이디:</label>
+                <input type="text" id="id" name="id">
+                <button class="Ekreo">중복확인</button>
+            </div>
+            <div class="space_login_item">
+                <label for="password">비밀번호:</label>
+                <input type="password" id="password" name="password">
+            </div>
+            <div class="space_login_item">
+                <label for="confirm_password">비밀번호 확인:</label>
+                <input type="password" id="confirm_password" name="confirm_password">
+            </div>
+        </div>
+        <div class="rectangle">
+            <h4>이름 본명으로 쓰세요★</h4>
+            <h4>개인정보 입력 후 수정 불가합니다.</h4>
+            <h4>아이디, 비밀번호는 숫자 및 알파벳으로만 작성가능합니다.</h4>
+        </div>
+        <div class="inner-rectangle">
+            <div>
+                <label for="name">이름:</label>
+                <input type="text" id="name" name="name">
+            </div>
+            <div>
+                <label for="age">나이:</label>
+                <input type="text" id="age" name="age">
+            </div>
+            <div>
+                <label for="gender">성별:</label>
+                <input type="text" id="gender" name="gender">
+            </div>
+            <div>
+                <label for="region">지역:</label>
+                <input type="text" id="region" name="region">
+            </div>
+        </div>
+        <div id="complete-button">
+            <button class="complete-button">완료</button>
+        </div>
+    </div>
+</body>
+</html>
