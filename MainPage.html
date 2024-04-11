@@ -25,7 +25,7 @@
                 </a>
             </div>
             <div class="nav_top_profile_setting">
-                <img class="icon setIcon" src="src/icon/set.png">
+                <img class="icon" src="src/icon/set.png">
             </div>
         </div>
         <div class="nav_top" id="div1"> <!--상단 nav bar-->
@@ -168,10 +168,18 @@
                 // transition-duration : 애니메이션 효과가 몇초 지난 후 작동 할지 설정합니다.
             }
 
+            //로그인 시 username, 로그아웃 이미지 띄우기
+            let username = sessionStorage.getItem('username');
+            if (username) {
+                $(".nav_top_profile_iden").html(`<span class="icon">${username}</span>`);
+                $(".nav_top_profile_setting").html(`<img class="icon" id="logout" src="src/icon/logout.png">`);
+            }
 
-            $('.setIcon').click(function () {
-                alert('asdf');
-                window.history.back();
+            //로그아웃
+            $("#logout").click(function () {
+                sessionStorage.removeItem('username');
+                alert("로그아웃");
+                location.reload();
             });
 
             //로그인 조회

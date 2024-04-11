@@ -68,28 +68,28 @@
         const analytics = getAnalytics(app);
         const db = getFirestore(app);
 
-
+        //로그인 버튼
         $("#loginbtn").click(async function () {
-
+            //입력 값 로드
             let InputId = $('#ID').val();
             let InputPwd = $("#PW").val();
-            console.log(InputId);
-            console.log(InputPwd);
-            
-            let loginIdx = 0;
-            let docs = await getDocs(collection(db, "user"));
-            docs.forEach((doc) => {
-                let row = doc.data();
-                doc.id;
 
+            
+            //로그인 성공 여부 판별 값
+            let loginIdx = 0;
+            //파이어 베이스 user 값 로드
+            let docs = await getDocs(collection(db, "user"));
+            //필드 순회
+            docs.forEach((doc) => {
+                // 값 로드
+                let row = doc.data();
                 let id = row['id'];
                 let password = row['password'];
                 let username = row['username'];
                 let email = row['email'];
                 let docs_id = doc.id;
-                console.log(id,password,username,email,docs_id);
                 
-                
+                //데이터 비교
                 if (InputId === id && InputPwd === password) {
                     alert("로그인 성공")
                     location.href = 'MainPage.html';
@@ -97,7 +97,8 @@
                     sessionStorage.setItem('username', username);
                 } 
             });
-            if (loginIdx === 0) alert("아이디 또는 비밀번호가 틀립니다.");
+            //
+            if (loginIdx === 0) alert("아이디 또는 비밀번호가 일치하지 않습니다.");
         });
 
         $("#signupbtn").click(async function () {

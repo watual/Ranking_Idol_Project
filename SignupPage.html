@@ -140,7 +140,7 @@
             let InputCfpwd = $("#cfpw").val();
             let Inputurn = $("#urn").val();
 
-            console.log(InputId, InputPwd, InputCfpwd, Inputurn, Inputemail);
+            //console.log(InputId, InputPwd, InputCfpwd, Inputurn, Inputemail);
 
             //중복체크,비밀번호 확인 용 변수
             let idcheck = false;
@@ -150,7 +150,7 @@
             let pwcheck = false;
 
 
-            console.log(idcheck, emailcheck, cfmpw);
+            //console.log(idcheck,idlengthcheck,cfmpw,pwcheck,emailcheck);
 
             //파이어베이스 데이터 로드
             let docs = await getDocs(collection(db, "user"));
@@ -174,8 +174,8 @@
                 if (count === 0) { idcheck = true; }
 
                 //비밀번호 유효성 확인
-                pwcheck = strongPassword(pwcheck);
-
+                console.log(strongPassword(pwcheck));
+                pwcheck =strongPassword(InputPwd);
                 //아이디 유효성 확인
                 idlengthcheck = idLength(InputId);
 
@@ -199,7 +199,7 @@
                     cfmpw = true;
                 }
 
-                console.log(idcheck, emailcheck, cfmpw);
+                //console.log(idcheck,idlengthcheck,cfmpw,pwcheck,emailcheck);
 
                 //가입 실패 alert 문자열
                 let failstring = "<가입 실패>\n";
