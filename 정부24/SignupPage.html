@@ -26,14 +26,12 @@
         }
 
         h3 {
-
             color: white;
-            margin: 50px auto 0px auto;
+            margin: 0px auto 0px auto;
             text-align: center;
         }
 
         .mypostingbox {
-
             width: 500px;
             width: 500px;
             margin: 5px auto 20px auto;
@@ -50,7 +48,7 @@
             background-color: white;
         }
 
-        .check {
+        .alert {
             color: white;
         }
     </style>
@@ -83,7 +81,57 @@
         const db = getFirestore(app);
 
 
+        //아이디 유효성 검사
+        function idLength(value) {
+            return value.length >= 4 && value.length <= 12
+        }
+        $("#id").keyup(function (e) {
+            let keyvalue = $(this).val();
+            console.log(keyvalue);
+            if (!idLength(keyvalue)) {
+                $("#idalert").show();
+            } else {
+                $("#idalert").hide();
+            }
+        });
 
+
+        //비밀번호 유효성 검사(8자리 이상, 영문,숫자,특수문자 사용), 비밀번호 확인 유효성 검사
+        function strongPassword(str) {
+            return /^(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*#?&])[A-Za-z\d@$!%*#?&]{8,}$/.test(str);
+        }
+        $("#pw").keyup(function (e) {
+            let keyvalue = $(this).val();
+            let comparevalue = $("#cfpw").val();
+
+            console.log(keyvalue);
+            //비밀번호 유효성 검사
+            if (!strongPassword(keyvalue)) {
+                $("#pwalert").show();
+            } else {
+                $("#pwalert").hide();
+            }
+            //비밀번호 확인 유효성 검사
+            if (keyvalue === comparevalue) {
+                $("#confirm-alert").html("");
+            } else {
+                $("#confirm-alert").html('<span class="alert">비밀번호가 다릅니다</span>');
+            }
+        });
+
+
+        //비밀번호 확인 유효성 검사
+        $("#cfpw").keyup(async function (e) {
+            let keyvalue = $(this).val();
+            let comparevalue = $("#pw").val();
+            if (keyvalue === comparevalue) {
+                $("#confirm-alert").html("");
+            } else {
+                $("#confirm-alert").html('<span class="alert">비밀번호가 다릅니다</span>');
+            }
+        });
+
+        //회원가입 버튼
         $("#signupbt").click(async function () {
             //입력 값 로드
             let InputId = $('#id').val();
@@ -98,6 +146,9 @@
             let idcheck = false;
             let emailcheck = false;
             let cfmpw = false;
+            let idlengthcheck = false;
+            let pwcheck = false;
+
 
             console.log(idcheck, emailcheck, cfmpw);
 
@@ -107,7 +158,7 @@
             //입력 확인
             if (!InputId || !Inputemail || !InputPwd || !InputCfpwd || !Inputurn) {
                 alert("빈칸이 있습니다. 모두 입력해주세요");
-            } 
+            }
             else {
                 //아이디 중복 확인
                 let count = 0;
@@ -116,20 +167,25 @@
                     let id = row['id'];
 
                     if (InputId === id) {
-                        alert("아이디 중복. 다른 아이디를 입력하세요.");
+                        
                         count++;
                     }
                 });
                 if (count === 0) { idcheck = true; }
 
-                
+                //비밀번호 유효성 확인
+                pwcheck = strongPassword(pwcheck);
+
+                //아이디 유효성 확인
+                idlengthcheck = idLength(InputId);
+
                 //이메일 중복 확인
                 count = 0
                 docs.forEach((doc) => {
                     let row = doc.data();
                     let email = row['email'];
                     if (Inputemail === email) {
-                        alert("이메일 중복. 다른 이메일을 입력하세요.");
+                        
                         count++;
                     }
                 });
@@ -138,15 +194,36 @@
 
                 //비밀번호 확인
                 if (InputPwd !== InputCfpwd) {
-                    alert("비밀번호와 확인 비밀번호가 다릅니다. 다시 확인하세요.")
+                   
                 } else {
                     cfmpw = true;
                 }
 
                 console.log(idcheck, emailcheck, cfmpw);
 
+                //가입 실패 alert 문자열
+                let failstring = "<가입 실패>\n";
+                if (!idcheck) {
+                    failstring += "아이디가 중복입니다. 다른 아이디를 입력하세요.\n"
+                }
+                if (!idlengthcheck) {
+                    failstring += "아이디를 4글자 이상 12글자 이하로 입력하세요.\n"
+                }
+                if (!cfmpw) {
+                    failstring += "비밀번호와 확인 비밀번호가 다릅니다.\n"
+                }
+                if (!pwcheck) {
+                    failstring += "비밀번호를 8자 이상, 영문, 숫자, 특수문자(@$!%*#?&)를 사용하세요\n"
+                }
+                if (!emailcheck) {
+                    failstring += "이메일이 중복입니다. 다른 이메일을 입력하세요.\n"
+                }
+
+
+
+
                 //파이어베이스 데이터 추가
-                if (idcheck && emailcheck && cfmpw) {
+                if (idcheck && emailcheck && cfmpw && idlengthcheck && pwcheck) {
 
                     console.log(InputId, InputPwd, Inputurn, Inputemail);
 
@@ -158,6 +235,8 @@
                     });
                     alert('가입 완료');
                     location.href = 'LoginPage.html';
+                } else {
+                    alert(failstring);
                 }
             }
         });
@@ -172,13 +251,17 @@
     </script>
 </head>
 
+
+
+
 <body>
     <!--상단-->
     <div class="top">
-        <a href="LoginPage.html">
-            <img class="logo" src="src/logo.png" />
+        <a href="MainPage.html">
+            <img class="logo" src="src/logo.png"/>
         </a>
     </div>
+
 
 
 
@@ -186,24 +269,28 @@
     <div id="postingbox" class="mypostingbox">
         <div class="form-floating mb-3" id="idbox">
             <input type="email" class="form-control" id="id" placeholder="id">
-            <label for="floatingInput">ID</label>
+            <label for="id">ID</label>
+            <span class="alert" id="idalert">4글자 이상 12글자 이하로 입력하세요</span>
         </div>
 
         <div class="form-floating mb-3">
             <input type="password" class="form-control" id="pw" placeholder="pw">
-            <label for="floatingInput">PASSWORD</label>
+            <label for="pw">PASSWORD</label>
+            <span class="alert" id="pwalert">8자 이상, 영문, 숫자, 특수문자(@$!%*#?&)를 사용하세요</span>
         </div>
-        <div class="form-floating mb-3">
+
+        <div class="form-floating mb-3" >
             <input type="password" class="form-control" id="cfpw" placeholder="pw">
-            <label for="floatingInput">CONFIRM PASSWORD</label>
+            <label for="cfpw">CONFIRM PASSWORD</label>
+            <div id="confirm-alert"></div>
         </div>
         <div class="form-floating mb-3">
-            <input type="email" class="form-control" id="urn" placeholder="username">
-            <label for="floatingInput">USERNAME</label>
+            <input type="text" class="form-control" id="urn" placeholder="username">
+            <label for="urn">USERNAME</label>
         </div>
         <div class="form-floating mb-3">
             <input type="email" class="form-control" id="email" placeholder="email">
-            <label for="floatingInput">E-MAIL</label>
+            <label for="email">E-MAIL</label>
         </div>
         <div class="mybtn">
             <button id="signupbt" type="button" class="btn btn-outline-danger">가입하기</button>
@@ -211,11 +298,6 @@
                 돌아가기</button>
         </div>
     </div>
-
-
-
-
-
 </body>
 
 </html>
