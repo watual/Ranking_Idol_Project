@@ -109,7 +109,7 @@
             $(window).scroll(function () {
                 var scrT = $(window).scrollTop();
                 console.log(scrT); //스크롤 값 확인용
-                if (scrT >= $(document).height() - $(window).height()-1) {
+                if (scrT >= $(document).height() - $(window).height()-10) {
                     //스크롤이 끝에 도달했을때 실행될 이벤트
                     // 다른 HTML 파일로 이동
                     sessionStorage.setItem('first', 'first');
